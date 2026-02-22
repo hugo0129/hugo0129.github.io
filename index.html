@@ -1,0 +1,1919 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>江西AI圈 | 让 AI 在红土地上，不仅开花，更能结果</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #C41E3A;
+            --color-secondary: #8B0000;
+            --color-accent: #FFD700;
+            --color-dark: #1a1a2e;
+            --color-darker: #0f0f1a;
+            --color-light: #f5f5f5;
+            --color-gray: #888;
+            --gradient-hero: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f1a 100%);
+            --gradient-card: linear-gradient(145deg, rgba(196, 30, 58, 0.1) 0%, rgba(139, 0, 0, 0.05) 100%);
+            --font-display: 'Noto Serif SC', serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--color-darker);
+            color: var(--color-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            background: rgba(15, 15, 26, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(196, 30, 58, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            padding: 0.5rem 2rem;
+            background: rgba(15, 15, 26, 0.95);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-light);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--color-gray);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--color-light);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--color-primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: var(--color-primary);
+            color: var(--color-light);
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-cta:hover {
+            background: var(--color-secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(196, 30, 58, 0.3);
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: var(--gradient-hero);
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+        }
+
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 30%, rgba(196, 30, 58, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 70%, rgba(255, 215, 0, 0.1) 0%, transparent 50%);
+            animation: rotate 30s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .hero-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--color-accent);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float 15s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 0.3; }
+            50% { transform: translateY(-100px) translateX(50px); opacity: 0.8; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 2rem;
+            max-width: 900px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(196, 30, 58, 0.2);
+            border: 1px solid rgba(196, 30, 58, 0.3);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: var(--color-accent);
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .hero-badge-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--color-accent);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        .hero-title .highlight {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: var(--color-gray);
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease 0.6s both;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            color: var(--color-light);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(196, 30, 58, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--color-light);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--color-primary);
+            background: rgba(196, 30, 58, 0.1);
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 4rem;
+            animation: fadeInUp 0.8s ease 0.8s both;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--color-accent);
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--color-gray);
+            margin-top: 0.25rem;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        section {
+            padding: 6rem 2rem;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--color-primary);
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .section-desc {
+            color: var(--color-gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .about {
+            background: var(--color-dark);
+        }
+
+        .about-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-content h3 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-content p {
+            color: var(--color-gray);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .about-values {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .value-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            background: rgba(196, 30, 58, 0.1);
+            border-radius: 12px;
+            border: 1px solid rgba(196, 30, 58, 0.2);
+        }
+
+        .value-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--color-primary);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .value-text {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .about-visual {
+            position: relative;
+        }
+
+        .founders-carousel {
+            position: relative;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .carousel-slide {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .carousel-slide.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .carousel-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .carousel-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid var(--color-primary);
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0;
+        }
+
+        .carousel-indicator.active {
+            background: var(--color-primary);
+            transform: scale(1.2);
+        }
+
+        .carousel-indicator:hover {
+            background: rgba(196, 30, 58, 0.5);
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(196, 30, 58, 0.8);
+            color: var(--color-light);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .carousel-btn:hover {
+            background: var(--color-primary);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .carousel-prev {
+            left: -60px;
+        }
+
+        .carousel-next {
+            right: -60px;
+        }
+
+        .about-card {
+            background: var(--gradient-card);
+            border: 1px solid rgba(196, 30, 58, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+        }
+
+        .founder-info {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .founder-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            object-fit: cover;
+            border: 3px solid var(--color-primary);
+        }
+
+        .founder-details h4 {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .founder-details p {
+            color: var(--color-gray);
+            font-size: 0.9rem;
+        }
+
+        .founder-bio {
+            color: var(--color-gray);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .contact-qr {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        .contact-qr img {
+            width: 120px;
+            height: 120px;
+            border-radius: 12px;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-qr p {
+            font-size: 0.85rem;
+            color: var(--color-gray);
+        }
+
+        .solutions {
+            background: var(--color-darker);
+        }
+
+        .solutions-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .solution-card {
+            background: var(--gradient-card);
+            border: 1px solid rgba(196, 30, 58, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .solution-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--color-primary);
+            box-shadow: 0 20px 40px rgba(196, 30, 58, 0.2);
+        }
+
+        .solution-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .solution-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .solution-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .solution-name {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .solution-desc {
+            color: var(--color-gray);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .solution-features {
+            list-style: none;
+            padding: 0;
+        }
+
+        .solution-features li {
+            color: var(--color-gray);
+            font-size: 0.85rem;
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .solution-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--color-accent);
+            font-weight: bold;
+        }
+
+        .brands {
+            background: var(--color-dark);
+        }
+
+        .brands-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .brand-card {
+            background: var(--gradient-card);
+            border: 1px solid rgba(196, 30, 58, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .brand-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--color-primary);
+            box-shadow: 0 20px 40px rgba(196, 30, 58, 0.2);
+        }
+
+        .brand-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .brand-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .brand-logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 16px;
+            object-fit: cover;
+            margin-bottom: 1.5rem;
+            border: 2px solid rgba(196, 30, 58, 0.3);
+        }
+
+        .brand-name {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .brand-slogan {
+            color: var(--color-accent);
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+
+        .brand-desc {
+            color: var(--color-gray);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .brand-stats {
+            display: flex;
+            gap: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .brand-stat {
+            text-align: center;
+        }
+
+        .brand-stat-value {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-accent);
+        }
+
+        .brand-stat-label {
+            font-size: 0.75rem;
+            color: var(--color-gray);
+        }
+
+        .activities {
+            background: var(--color-darker);
+        }
+
+        .activities-timeline {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .activities-timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--color-primary), var(--color-accent));
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            display: flex;
+            justify-content: flex-end;
+            padding-right: calc(50% + 2rem);
+            position: relative;
+            margin-bottom: 3rem;
+        }
+
+        .timeline-item:nth-child(even) {
+            justify-content: flex-start;
+            padding-right: 0;
+            padding-left: calc(50% + 2rem);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            background: var(--color-primary);
+            border: 3px solid var(--color-darker);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+
+        .timeline-content {
+            background: var(--gradient-card);
+            border: 1px solid rgba(196, 30, 58, 0.2);
+            border-radius: 16px;
+            padding: 1.5rem;
+            max-width: 400px;
+        }
+
+        .timeline-date {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            background: rgba(196, 30, 58, 0.2);
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            margin-bottom: 0.75rem;
+        }
+
+        .timeline-title {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-desc {
+            color: var(--color-gray);
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+
+        .cities {
+            background: var(--color-dark);
+        }
+
+        .cities-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .city-card {
+            background: var(--gradient-card);
+            border: 1px solid rgba(196, 30, 58, 0.2);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .city-card.active {
+            border-color: var(--color-primary);
+        }
+
+        .city-card.active::before {
+            content: '已启动';
+            position: absolute;
+            top: 10px;
+            right: -30px;
+            background: var(--color-primary);
+            color: var(--color-light);
+            font-size: 0.65rem;
+            font-weight: 600;
+            padding: 0.2rem 2rem;
+            transform: rotate(45deg);
+        }
+
+        .city-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--color-primary);
+        }
+
+        .city-name {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .city-status {
+            font-size: 0.8rem;
+            color: var(--color-gray);
+        }
+
+        .city-card.active .city-status {
+            color: var(--color-accent);
+        }
+
+        .co-creation {
+            background: linear-gradient(135deg, var(--color-dark) 0%, var(--color-darker) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .co-creation::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(196, 30, 58, 0.1) 0%, transparent 50%);
+        }
+
+        .co-creation-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .co-creation-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .co-creation-card {
+            background: var(--gradient-card);
+            border: 1px solid rgba(196, 30, 58, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .co-creation-card:hover {
+            border-color: var(--color-primary);
+            transform: translateY(-5px);
+        }
+
+        .co-creation-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--color-primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .co-creation-title {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .co-creation-desc {
+            color: var(--color-gray);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .join {
+            background: var(--color-darker);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .join::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(196, 30, 58, 0.1) 0%, transparent 50%);
+        }
+
+        .join-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .join-title {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .join-desc {
+            color: var(--color-gray);
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+        }
+
+        .join-methods {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .join-method {
+            background: rgba(196, 30, 58, 0.1);
+            border: 1px solid rgba(196, 30, 58, 0.2);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .join-method:hover {
+            border-color: var(--color-primary);
+            transform: translateY(-5px);
+        }
+
+        .join-method-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--color-primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin: 0 auto 1rem;
+        }
+
+        .join-method-name {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .join-method-desc {
+            font-size: 0.85rem;
+            color: var(--color-gray);
+        }
+
+        footer {
+            background: var(--color-darker);
+            border-top: 1px solid rgba(196, 30, 58, 0.2);
+            padding: 3rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .footer-logo {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .footer-tagline {
+            color: var(--color-gray);
+            font-size: 0.9rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--color-gray);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--color-light);
+        }
+
+        @media (max-width: 1024px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .carousel-prev {
+                left: 10px;
+            }
+
+            .carousel-next {
+                right: 10px;
+            }
+
+            .solutions-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .brands-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cities-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .co-creation-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .join-methods {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .about-values {
+                grid-template-columns: 1fr;
+            }
+
+            .solutions-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .activities-timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item,
+            .timeline-item:nth-child(even) {
+                padding-left: 50px;
+                padding-right: 0;
+                justify-content: flex-start;
+            }
+
+            .timeline-dot {
+                left: 20px;
+            }
+
+            .timeline-content {
+                max-width: 100%;
+            }
+
+            .cities-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+            }
+
+            .footer-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: var(--gradient-card);
+            border: 2px solid var(--color-primary);
+            border-radius: 24px;
+            padding: 3rem;
+            max-width: 400px;
+            text-align: center;
+            position: relative;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2rem;
+            color: var(--color-gray);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            line-height: 1;
+        }
+
+        .modal-close:hover {
+            color: var(--color-primary);
+            transform: rotate(90deg);
+        }
+
+        .modal-title {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--color-light);
+        }
+
+        .modal-qr {
+            width: 250px;
+            height: 250px;
+            border-radius: 16px;
+            margin-bottom: 1.5rem;
+            border: 3px solid var(--color-primary);
+        }
+
+        .modal-desc {
+            color: var(--color-gray);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <img src="image/江西AI圈logo.jpg" alt="江西AI圈" class="logo-icon">
+                江西AI圈
+            </a>
+            <ul class="nav-links">
+                <li><a href="#about">关于我们</a></li>
+                <li><a href="#solutions">解决方案</a></li>
+                <li><a href="#brands">品牌矩阵</a></li>
+                <li><a href="#activities">发展历程</a></li>
+                <li><a href="#co-creation">共建共创</a></li>
+            </ul>
+            <a href="#join" class="nav-cta">加入我们</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-bg">
+            <div class="hero-particles" id="particles"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="hero-badge-dot"></span>
+                马年开局 · 三个城市已启动
+            </div>
+            <h1 class="hero-title">
+                让 <span class="highlight">AI</span> 在红土地上<br>
+                不仅开花，更能结果
+            </h1>
+            <p class="hero-subtitle">
+                江西本土AI生态建设者，连接技术、人才与产业资源，共赴AI时代百年机遇
+            </p>
+            <div class="hero-actions">
+                <a href="#solutions" class="btn btn-primary">
+                    <span>🚀</span>
+                    查看解决方案
+                </a>
+                <a href="#about" class="btn btn-secondary">
+                    <span>📖</span>
+                    了解更多
+                </a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <div class="stat-value">600+</div>
+                    <div class="stat-label">社群成员</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">8+</div>
+                    <div class="stat-label">线下活动</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">3</div>
+                    <div class="stat-label">城市分站</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <div class="section-header">
+            <span class="section-tag">关于我们</span>
+            <h2 class="section-title">星星之火，可以燎原</h2>
+            <p class="section-desc">从一个人到三个城市，江西AI圈正在用行动证明：江西人，可以在AI时代做点不一样的事情</p>
+        </div>
+        <div class="about-grid">
+            <div class="about-content fade-in">
+                <h3>构建江西本土AI生态</h3>
+                <p>
+                    江西AI圈是江西本土AI从业者与爱好者的交流平台，连接技术、人才与产业资源。
+                    我们相信，AI时代是江西弥补互联网时代空缺的百年机遇。
+                </p>
+                <p>
+                    我们不追求概念炒作，只追求技术落地。代码写在屏幕上，更要写在业务里。
+                    让AI技术真正服务于本地特色产业，创造实际价值。
+                </p>
+                <div class="about-values">
+                    <div class="value-item">
+                        <div class="value-icon">🎯</div>
+                        <span class="value-text">真诚利他</span>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-icon">🤝</div>
+                        <span class="value-text">合作共赢</span>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-icon">🌱</div>
+                        <span class="value-text">长期主义</span>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-icon">💡</div>
+                        <span class="value-text">价值驱动</span>
+                    </div>
+                </div>
+            </div>
+            <div class="about-visual fade-in">
+                <div class="founders-carousel">
+                    <div class="carousel-container">
+                        <div class="carousel-slide active">
+                            <div class="about-card">
+                                <div class="founder-info">
+                                    <img src="image/莫西头像.jpg" alt="莫西" class="founder-avatar">
+                                    <div class="founder-details">
+                                        <h4>莫西</h4>
+                                        <p>江西AI圈创始人 & 主理人</p>
+                                    </div>
+                                </div>
+                                <p class="founder-bio">
+                                    拥有近 10 年一线互联网研发经验，曾任技术总监，深耕 AI 技术与产业落地，具备丰富的一线 AI 资源与头部社群资源。
+                                    从上海回到南昌，希望借助 AI 发展浪潮，补齐江西互联网产业短板，打造具有本土特色的 AI 产业生态。
+                                </p>
+                                <div class="contact-qr">
+                                    <img src="image/莫西微信号.jpg" alt="添加微信">
+                                    <p>扫码添加微信</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <div class="about-card">
+                                <div class="founder-info">
+                                    <img src="image/王珉头像.jpg" alt="王珉" class="founder-avatar">
+                                    <div class="founder-details">
+                                        <h4>王珉</h4>
+                                        <p>江西AI圈联合创始人</p>
+                                    </div>
+                                </div>
+                                <p class="founder-bio">
+                                    头部AI智能体技术负责人，深耕混沌、得到等优质生态。
+                                    2023年从大厂离职投身AI创业，聚焦政企+AI赛道，累计开展百余场AI专业培训。
+                                    深耕AI微短剧制作、高校产教融合、K12人工智能教育等领域。
+                                </p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <div class="about-card">
+                                <div class="founder-info">
+                                    <img src="image/殷磊头像.jpg" alt="殷磊" class="founder-avatar">
+                                    <div class="founder-details">
+                                        <h4>殷磊</h4>
+                                        <p>江西AI圈联合创始人</p>
+                                    </div>
+                                </div>
+                                <p class="founder-bio">
+                                    AIGCxChina南昌发起人、WaytoAGI南昌发起人。
+                                    AI新春晚会节目主创，2022年接触AI，拥有丰富的AI圈资源，能接触到杭州六小龙、腾讯阿里等大厂资源。
+                                    在全国属于头部AI联盟，在任何城市都能找到小伙伴和组织。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-indicators">
+                        <button class="carousel-indicator active" data-slide="0"></button>
+                        <button class="carousel-indicator" data-slide="1"></button>
+                        <button class="carousel-indicator" data-slide="2"></button>
+                    </div>
+                    <button class="carousel-btn carousel-prev" aria-label="上一个">❮</button>
+                    <button class="carousel-btn carousel-next" aria-label="下一个">❯</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="solutions" id="solutions">
+        <div class="section-header">
+            <span class="section-tag">解决方案</span>
+            <h2 class="section-title">专业AI服务，助力企业转型</h2>
+            <p class="section-desc">从咨询到落地，全方位支持企业AI化升级，欢迎咨询合作</p>
+        </div>
+        <div class="solutions-grid">
+            <div class="solution-card fade-in">
+                <div class="solution-icon">🤖</div>
+                <h3 class="solution-name">企业AI智能体定制</h3>
+                <p class="solution-desc">为企业量身定制AI智能体，提升业务效率</p>
+                <ul class="solution-features">
+                    <li>智能客服系统</li>
+                    <li>业务流程自动化</li>
+                    <li>数据分析助手</li>
+                </ul>
+            </div>
+            <div class="solution-card fade-in">
+                <div class="solution-icon">🎬</div>
+                <h3 class="solution-name">企业AI视频定制</h3>
+                <p class="solution-desc">AI驱动的视频内容创作，降低制作成本</p>
+                <ul class="solution-features">
+                    <li>AI短视频制作</li>
+                    <li>数字人直播</li>
+                    <li>营销视频生成</li>
+                </ul>
+            </div>
+            <div class="solution-card fade-in">
+                <div class="solution-icon">📚</div>
+                <h3 class="solution-name">企业AI培训</h3>
+                <p class="solution-desc">系统化AI技能培训，提升团队AI能力</p>
+                <ul class="solution-features">
+                    <li>AI工具应用培训</li>
+                    <li>AI思维培养</li>
+                    <li>实战项目演练</li>
+                </ul>
+            </div>
+            <div class="solution-card fade-in">
+                <div class="solution-icon">🎓</div>
+                <h3 class="solution-name">高校AI实训</h3>
+                <p class="solution-desc">产教融合，培养AI实战人才</p>
+                <ul class="solution-features">
+                    <li>AI课程体系设计</li>
+                    <li>实训项目开发</li>
+                    <li>就业指导服务</li>
+                </ul>
+            </div>
+            <div class="solution-card fade-in">
+                <div class="solution-icon">🔍</div>
+                <h3 class="solution-name">AI搜索优化</h3>
+                <p class="solution-desc">提升AI搜索时代的品牌可见度</p>
+                <ul class="solution-features">
+                    <li>AI搜索排名优化</li>
+                    <li>内容策略规划</li>
+                    <li>数据监控分析</li>
+                </ul>
+            </div>
+            <div class="solution-card fade-in">
+                <div class="solution-icon">💼</div>
+                <h3 class="solution-name">企业AI转型咨询</h3>
+                <p class="solution-desc">专业咨询，规划企业AI转型路径</p>
+                <ul class="solution-features">
+                    <li>现状评估诊断</li>
+                    <li>转型方案设计</li>
+                    <li>实施路径规划</li>
+                </ul>
+            </div>
+            <div class="solution-card fade-in">
+                <div class="solution-icon">🏭</div>
+                <h3 class="solution-name">AI行业赋能</h3>
+                <p class="solution-desc">垂直行业AI解决方案，深度赋能产业</p>
+                <ul class="solution-features">
+                    <li>行业场景分析</li>
+                    <li>定制化开发</li>
+                    <li>持续运营支持</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="brands" id="brands">
+        <div class="section-header">
+            <span class="section-tag">品牌矩阵</span>
+            <h2 class="section-title">三个品牌，一个生态</h2>
+            <p class="section-desc">相互赋能，共同推动AI技术从概念走向江西本土的实际应用场景</p>
+        </div>
+        <div class="brands-grid">
+            <div class="brand-card fade-in">
+                <img src="image/江西AI圈logo.jpg" alt="江西AI圈" class="brand-logo">
+                <h3 class="brand-name">江西AI圈</h3>
+                <p class="brand-slogan">智引赣鄱潮</p>
+                <p class="brand-desc">全省范围的AI从业者与爱好者交流平台，连接技术、人才与产业资源</p>
+                <div class="brand-stats">
+                    <div class="brand-stat">
+                        <div class="brand-stat-value">600+</div>
+                        <div class="brand-stat-label">成员</div>
+                    </div>
+                    <div class="brand-stat">
+                        <div class="brand-stat-value">全省</div>
+                        <div class="brand-stat-label">覆盖</div>
+                    </div>
+                </div>
+            </div>
+            <div class="brand-card fade-in">
+                <img src="image/南昌AI圈logo.jpeg" alt="南昌AI圈" class="brand-logo">
+                <h3 class="brand-name">南昌AI圈</h3>
+                <p class="brand-slogan">智响英雄城</p>
+                <p class="brand-desc">省会城市核心社群，聚焦本地化资源对接，打造英雄城AI产业生态</p>
+                <div class="brand-stats">
+                    <div class="brand-stat">
+                        <div class="brand-stat-value">370+</div>
+                        <div class="brand-stat-label">成员</div>
+                    </div>
+                    <div class="brand-stat">
+                        <div class="brand-stat-value">8期</div>
+                        <div class="brand-stat-label">活动</div>
+                    </div>
+                </div>
+            </div>
+            <div class="brand-card fade-in">
+                <img src="image/赣客松logo.png" alt="赣客松" class="brand-logo">
+                <h3 class="brand-name">赣客松</h3>
+                <p class="brand-slogan">不聊概念，只搞真落地</p>
+                <p class="brand-desc">江西首个聚焦真实业务需求的AI黑客松，搭建需求方与技术方对接平台</p>
+                <div class="brand-stats">
+                    <div class="brand-stat">
+                        <div class="brand-stat-value">12h</div>
+                        <div class="brand-stat-label">极限编程</div>
+                    </div>
+                    <div class="brand-stat">
+                        <div class="brand-stat-value">真实</div>
+                        <div class="brand-stat-label">AI需求</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="activities" id="activities">
+        <div class="section-header">
+            <span class="section-tag">发展历程</span>
+            <h2 class="section-title">每月一期，持续连接</h2>
+            <p class="section-desc">从第0期到第8期，每一次活动都是一次真诚的连接</p>
+        </div>
+        <div class="activities-timeline">
+            <div class="timeline-item fade-in">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="timeline-date">2026年2月</span>
+                    <h4 class="timeline-title">第8期：赣州AI圈第1期</h4>
+                    <p class="timeline-desc">赣州AI圈正式启动，第三座城市点亮，江西AI生态版图进一步扩大</p>
+                </div>
+            </div>
+            <div class="timeline-item fade-in">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="timeline-date">2026年2月</span>
+                    <h4 class="timeline-title">第7期：我与AI的故事</h4>
+                    <p class="timeline-desc">AI圈发展历程首度公开，十几位来自南昌各地的AI从业者分享AI故事</p>
+                </div>
+            </div>
+            <div class="timeline-item fade-in">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="timeline-date">2026年1月</span>
+                    <h4 class="timeline-title">第6期：赣客松第1期</h4>
+                    <p class="timeline-desc">江西首个AI真需求黑客松，十几家企业，二十多位极客，共同进行AI方案落地讨论</p>
+                </div>
+            </div>
+            <div class="timeline-item fade-in">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="timeline-date">2025年12月</span>
+                    <h4 class="timeline-title">第5期：跨年活动</h4>
+                    <p class="timeline-desc">在滕王阁畔共话AI未来，来自各行各业的AI爱好者齐聚一堂</p>
+                </div>
+            </div>
+            <div class="timeline-item fade-in">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="timeline-date">2025年12月</span>
+                    <h4 class="timeline-title">第4期：九江AI圈第1期</h4>
+                    <p class="timeline-desc">九江AI圈正式启动，第二座城市点亮，南昌AI圈到江西AI圈的蜕变</p>
+                </div>
+            </div>
+            <div class="timeline-item fade-in">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="timeline-date">2025年11月</span>
+                    <h4 class="timeline-title">第3期：AI短剧专题</h4>
+                    <p class="timeline-desc">AI短剧与商业视频的整体制作流程，AI短剧的商业化实践与市场洞察</p>
+                </div>
+            </div>
+            <div class="timeline-item fade-in">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="timeline-date">2025年11月</span>
+                    <h4 class="timeline-title">第2期：AI出海&AI搜索优化</h4>
+                    <p class="timeline-desc">AI项目落地案例，AI出海产品宣发，AI搜索优化策略分享</p>
+                </div>
+            </div>
+            <div class="timeline-item fade-in">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="timeline-date">2025年10月</span>
+                    <h4 class="timeline-title">第1期：AIP爆款视频制作</h4>
+                    <p class="timeline-desc">近40位小伙伴参与，第一条AI视频20多万浏览量，视频号被百万大V关注</p>
+                </div>
+            </div>
+            <div class="timeline-item fade-in">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="timeline-date">2025年9月</span>
+                    <h4 class="timeline-title">第0期：南昌AI圈启动</h4>
+                    <p class="timeline-desc">莫西从上海回到南昌，发起南昌AI圈，星星之火开始点燃</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cities" id="cities">
+        <div class="section-header">
+            <span class="section-tag">城市覆盖</span>
+            <h2 class="section-title">11个城市，逐步点亮</h2>
+            <p class="section-desc">2026年目标：覆盖江西11个设区市，让每个江西AI人都能找到同城伙伴</p>
+        </div>
+        <div class="cities-grid">
+            <div class="city-card active fade-in">
+                <h4 class="city-name">南昌</h4>
+                <p class="city-status">省会核心 · 8期活动</p>
+            </div>
+            <div class="city-card active fade-in">
+                <h4 class="city-name">九江</h4>
+                <p class="city-status">已启动 · 线下活动</p>
+            </div>
+            <div class="city-card active fade-in">
+                <h4 class="city-name">赣州</h4>
+                <p class="city-status">已启动 · 线下活动</p>
+            </div>
+            <div class="city-card fade-in">
+                <h4 class="city-name">景德镇</h4>
+                <p class="city-status">筹备中</p>
+            </div>
+            <div class="city-card fade-in">
+                <h4 class="city-name">萍乡</h4>
+                <p class="city-status">筹备中</p>
+            </div>
+            <div class="city-card fade-in">
+                <h4 class="city-name">新余</h4>
+                <p class="city-status">筹备中</p>
+            </div>
+            <div class="city-card fade-in">
+                <h4 class="city-name">鹰潭</h4>
+                <p class="city-status">筹备中</p>
+            </div>
+            <div class="city-card fade-in">
+                <h4 class="city-name">上饶</h4>
+                <p class="city-status">筹备中</p>
+            </div>
+            <div class="city-card fade-in">
+                <h4 class="city-name">宜春</h4>
+                <p class="city-status">筹备中</p>
+            </div>
+            <div class="city-card fade-in">
+                <h4 class="city-name">吉安</h4>
+                <p class="city-status">筹备中</p>
+            </div>
+            <div class="city-card fade-in">
+                <h4 class="city-name">抚州</h4>
+                <p class="city-status">筹备中</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="co-creation" id="co-creation">
+        <div class="section-header">
+            <span class="section-tag">共建共创</span>
+            <h2 class="section-title">携手共建，共创未来</h2>
+            <p class="section-desc">江西AI圈欢迎每一位有志之士加入，共同打造江西AI生态</p>
+        </div>
+        <div class="co-creation-content">
+            <div class="co-creation-grid">
+                <div class="co-creation-card fade-in">
+                    <div class="co-creation-icon">💡</div>
+                    <h4 class="co-creation-title">技术共建</h4>
+                    <p class="co-creation-desc">分享AI技术经验，共同开发开源项目，推动江西AI技术发展</p>
+                </div>
+                <div class="co-creation-card fade-in">
+                    <div class="co-creation-icon">📢</div>
+                    <h4 class="co-creation-title">内容共创</h4>
+                    <p class="co-creation-desc">撰写AI教程文章，制作视频内容，传播AI知识，扩大影响力</p>
+                </div>
+                <div class="co-creation-card fade-in">
+                    <div class="co-creation-icon">🎯</div>
+                    <h4 class="co-creation-title">活动协办</h4>
+                    <p class="co-creation-desc">参与线下活动策划，提供场地资源，共同举办AI主题活动</p>
+                </div>
+                <div class="co-creation-card fade-in">
+                    <div class="co-creation-icon">🤝</div>
+                    <h4 class="co-creation-title">资源对接</h4>
+                    <p class="co-creation-desc">提供企业资源，对接项目需求，促进AI技术落地应用</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="join" id="join">
+        <div class="join-content">
+            <h2 class="join-title fade-in">加入江西AI圈</h2>
+            <p class="join-desc fade-in">
+                无论你是在外地的江西AI人，还是在江西的AI从业者，或是传统行业的企业主，<br>
+                江西AI圈都是你的"城市社群"、"资源库"和"导航仪"。
+            </p>
+            <div class="join-methods">
+                <div class="join-method fade-in">
+                    <div class="join-method-icon">📱</div>
+                    <h4 class="join-method-name">微信公众号</h4>
+                    <p class="join-method-desc">莫西AI<br>每周更新AI行业动态</p>
+                </div>
+                <div class="join-method fade-in">
+                    <div class="join-method-icon">📕</div>
+                    <h4 class="join-method-name">小红书</h4>
+                    <p class="join-method-desc">莫西AI<br>每月AI线下活动记录</p>
+                </div>
+                <div class="join-method fade-in">
+                    <div class="join-method-icon">💬</div>
+                    <h4 class="join-method-name">微信群</h4>
+                    <p class="join-method-desc">添加微信备注"城市+AI"<br>拉你进入对应城市社群</p>
+                </div>
+            </div>
+            <a href="#" class="btn btn-primary fade-in" id="joinBtn">
+                <span>🚀</span>
+                立即加入
+            </a>
+        </div>
+    </section>
+
+    <!-- Modal for WeChat QR Code -->
+    <div class="modal" id="wechatModal">
+        <div class="modal-content">
+            <span class="modal-close" id="modalClose">&times;</span>
+            <h3 class="modal-title">添加微信，加入江西AI圈</h3>
+            <img src="image/莫西微信号.jpg" alt="莫西微信二维码" class="modal-qr">
+            <p class="modal-desc">扫描二维码添加微信<br>备注"城市+AI"</p>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <span class="footer-logo">江西AI圈</span>
+                <span class="footer-tagline">让 AI 在红土地上，不仅开花，更能结果</span>
+            </div>
+            <div class="footer-links">
+                <a href="#about">关于我们</a>
+                <a href="#solutions">解决方案</a>
+                <a href="#brands">品牌矩阵</a>
+                <a href="#activities">发展历程</a>
+                <a href="#co-creation">共建共创</a>
+                <a href="#join">加入我们</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 50; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 15 + 's';
+            particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+            particlesContainer.appendChild(particle);
+        }
+
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        const fadeElements = document.querySelectorAll('.fade-in');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        fadeElements.forEach(el => observer.observe(el));
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Carousel functionality
+        const slides = document.querySelectorAll('.carousel-slide');
+        const indicators = document.querySelectorAll('.carousel-indicator');
+        const prevBtn = document.querySelector('.carousel-prev');
+        const nextBtn = document.querySelector('.carousel-next');
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            indicators.forEach(indicator => indicator.classList.remove('active'));
+            
+            currentSlide = (index + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+            indicators[currentSlide].classList.add('active');
+        }
+
+        prevBtn.addEventListener('click', () => showSlide(currentSlide - 1));
+        nextBtn.addEventListener('click', () => showSlide(currentSlide + 1));
+
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => showSlide(index));
+        });
+
+        // Auto-play carousel
+        setInterval(() => showSlide(currentSlide + 1), 5000);
+
+        // Modal functionality
+        const joinBtn = document.getElementById('joinBtn');
+        const wechatModal = document.getElementById('wechatModal');
+        const modalClose = document.getElementById('modalClose');
+
+        joinBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            wechatModal.classList.add('show');
+        });
+
+        modalClose.addEventListener('click', () => {
+            wechatModal.classList.remove('show');
+        });
+
+        wechatModal.addEventListener('click', (e) => {
+            if (e.target === wechatModal) {
+                wechatModal.classList.remove('show');
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && wechatModal.classList.contains('show')) {
+                wechatModal.classList.remove('show');
+            }
+        });
+    </script>
+</body>
+</html>
