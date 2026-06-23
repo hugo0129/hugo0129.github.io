@@ -41,7 +41,7 @@
 
   // ---------- Reveal on scroll ----------
   const revealEls = document.querySelectorAll(
-    '.section-head, .about-grid, .value-card, .brand-card, .night-cards, .night-illust, .solution, .logos-strip, .member, .partner-card, .city-banner, .cta-head, .cta-qr, .cta-form, .gallery-filters, .gallery-grid'
+    '.reveal, .section-head, .about-grid, .value-card, .brand-card, .night-cards, .night-illust, .solution, .logos-strip, .member, .partner-card, .city-banner, .cta-head, .cta-qr, .cta-form, .gallery-filters, .gallery-grid'
   );
   revealEls.forEach(el => el.classList.add('reveal'));
 
@@ -88,113 +88,93 @@
     });
   });
 
-  // ---------- Form submit (mock) ----------
-  const form = document.getElementById('ctaForm');
-  if (form) {
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const data = Object.fromEntries(new FormData(form).entries());
-      const btn = form.querySelector('button[type="submit"]');
-      const orig = btn.innerHTML;
-      btn.innerHTML = '<span>提交中…</span>';
-      btn.disabled = true;
-      setTimeout(() => {
-        btn.innerHTML = '<span>✓ 已收到，我们会尽快联系你</span>';
-        form.reset();
-        setTimeout(() => {
-          btn.innerHTML = orig;
-          btn.disabled = false;
-        }, 2400);
-      }, 700);
-      console.log('[CTA submission]', data);
-    });
-  }
 
-  // ---------- Gallery filter ----------
+  // ---------- Gallery filter & lightbox (only on pages with gallery) ----------
   const filters = document.querySelectorAll('.g-filter');
   const items = Array.from(document.querySelectorAll('.g-item'));
   const loadMoreBtn = document.getElementById('loadMoreBtn');
   const galleryLoadmore = document.getElementById('galleryLoadmore');
-  const PER_PAGE = 9;
-  let page = 1;
-  let activeCat = 'all';
-
-  const applyFilter = (cat) => {
-    activeCat = cat;
-    page = 1;
-    const visible = items.filter(it => cat === 'all' || it.dataset.cat === cat);
-    visible.forEach((it, idx) => {
-      it.classList.toggle('hidden', idx >= PER_PAGE);
-    });
-    if (visible.length <= PER_PAGE) {
-      galleryLoadmore.style.display = 'none';
-    } else {
-      galleryLoadmore.style.display = 'flex';
-    }
-  };
-
-  filters.forEach(f => {
-    f.addEventListener('click', () => {
-      filters.forEach(x => x.classList.toggle('active', x === f));
-      applyFilter(f.dataset.filter);
-    });
-  });
-
-  // Initially apply filter
-  applyFilter('all');
-
-  // Load more
-  if (loadMoreBtn) {
-    loadMoreBtn.addEventListener('click', () => {
-      page++;
-      const visible = items.filter(it => activeCat === 'all' || it.dataset.cat === activeCat);
-      const showCount = page * PER_PAGE;
-      visible.forEach((it, idx) => {
-        it.classList.toggle('hidden', idx >= showCount);
-      });
-      if (showCount >= visible.length) {
-        galleryLoadmore.style.display = 'none';
-      }
-    });
-  }
-
-  // ---------- Lightbox ----------
   const lb = document.getElementById('lightbox');
   const lbImg = document.getElementById('lbImg');
   const lbCap = document.getElementById('lbCap');
-  let lbIdx = 0;
-  let visibleItems = () => items.filter(it => !it.classList.contains('hidden'));
 
-  const openLb = (idx) => {
-    const list = visibleItems();
-    if (!list.length) return;
-    lbIdx = ((idx % list.length) + list.length) % list.length;
-    const target = list[lbIdx];
-    const img = target.querySelector('img');
-    const cap = target.querySelector('figcaption');
-    lbImg.src = img.src;
-    lbImg.alt = img.alt;
-    lbCap.textContent = cap ? cap.textContent.trim() : '';
-    lb.classList.add('open');
-    lb.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-  };
-  const closeLb = () => {
-    lb.classList.remove('open');
-    lb.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-  };
-  const stepLb = (delta) => openLb(lbIdx + delta);
+  if (items.length && galleryLoadmore && lb && lbImg && lbCap) {
+    const PER_PAGE = 9;
+    let page = 1;
+    let activeCat = 'all';
 
-  items.forEach((it) => {
-    it.addEventListener('click', () => {
-      const list = visibleItems();
-      const idx = list.indexOf(it);
-      if (idx >= 0) openLb(idx);
+    const applyFilter = (cat) => {
+      activeCat = cat;
+      page = 1;
+      const visible = items.filter(it => cat === 'all' || it.dataset.cat === cat);
+      visible.forEach((it, idx) => {
+        it.classList.toggle('hidden', idx >= PER_PAGE);
+      });
+      if (visible.length <= PER_PAGE) {
+        galleryLoadmore.style.display = 'none';
+      } else {
+        galleryLoadmore.style.display = 'flex';
+      }
+    };
+
+    filters.forEach(f => {
+      f.addEventListener('click', () => {
+        filters.forEach(x => x.classList.toggle('active', x === f));
+        applyFilter(f.dataset.filter);
+      });
     });
-  });
 
-  if (lb) {
+    // Initially apply filter
+    applyFilter('all');
+
+    // Load more
+    if (loadMoreBtn) {
+      loadMoreBtn.addEventListener('click', () => {
+        page++;
+        const visible = items.filter(it => activeCat === 'all' || it.dataset.cat === activeCat);
+        const showCount = page * PER_PAGE;
+        visible.forEach((it, idx) => {
+          it.classList.toggle('hidden', idx >= showCount);
+        });
+        if (showCount >= visible.length) {
+          galleryLoadmore.style.display = 'none';
+        }
+      });
+    }
+
+    // ---------- Lightbox ----------
+    let lbIdx = 0;
+    let visibleItems = () => items.filter(it => !it.classList.contains('hidden'));
+
+    const openLb = (idx) => {
+      const list = visibleItems();
+      if (!list.length) return;
+      lbIdx = ((idx % list.length) + list.length) % list.length;
+      const target = list[lbIdx];
+      const img = target.querySelector('img');
+      const cap = target.querySelector('figcaption');
+      lbImg.src = img.src;
+      lbImg.alt = img.alt;
+      lbCap.textContent = cap ? cap.textContent.trim() : '';
+      lb.classList.add('open');
+      lb.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    };
+    const closeLb = () => {
+      lb.classList.remove('open');
+      lb.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    };
+    const stepLb = (delta) => openLb(lbIdx + delta);
+
+    items.forEach((it) => {
+      it.addEventListener('click', () => {
+        const list = visibleItems();
+        const idx = list.indexOf(it);
+        if (idx >= 0) openLb(idx);
+      });
+    });
+
     lb.querySelector('.lb-close').addEventListener('click', closeLb);
     lb.querySelector('.lb-prev').addEventListener('click', () => stepLb(-1));
     lb.querySelector('.lb-next').addEventListener('click', () => stepLb(1));
