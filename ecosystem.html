@@ -367,52 +367,6 @@
       display: inline-block;
     }
 
-    /* FAQ (SEO) */
-    .eco-faq-section {
-      max-width: 840px;
-      margin: 0 auto 80px;
-      padding: 0 24px;
-    }
-    .eco-faq-section h2 {
-      font-family: var(--font-serif);
-      font-size: clamp(24px, 3.5vw, 36px);
-      font-weight: 900;
-      text-align: center;
-      margin: 0 0 32px;
-      color: var(--ink-900);
-    }
-    .faq-item {
-      background: #fff;
-      border-radius: var(--radius);
-      margin-bottom: 12px;
-      border: 1px solid rgba(21,17,12,.07);
-      overflow: hidden;
-    }
-    .faq-q {
-      padding: 18px 22px;
-      font-weight: 700;
-      font-size: 15px;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transition: background .2s;
-      color: var(--ink-900);
-      user-select: none;
-    }
-    .faq-q:hover { background: var(--ink-50); }
-    .faq-q::after { content: "+"; font-size: 20px; font-weight: 300; color: var(--soil-500); transition: transform .3s; }
-    .faq-item.open .faq-q::after { content: "×"; transform: scale(1.2); }
-    .faq-a {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height .35s ease, padding .35s ease;
-      font-size: 14px;
-      color: var(--ink-500);
-      line-height: 1.75;
-    }
-    .faq-item.open .faq-a { max-height: 280px; padding: 0 22px 18px; }
-
     @media (max-width: 800px) {
       .eco-brands-grid { grid-template-columns: 1fr; }
       .eco-brand-card.core-card { grid-column: auto; }
@@ -434,8 +388,9 @@
       </a>
       <div class="nav-links">
         <a href="index.html">首页</a>
-        <a href="ecosystem.html">生态体系</a>
+        <a href="ecosystem.html" aria-current="page">生态体系</a>
         <a href="talents.html">江西 AI 人才</a>
+        <a href="index.html#about">关于我们</a>
         <a href="index.html#brands">品牌矩阵</a>
         <a href="index.html#solutions">企业服务</a>
         <a href="index.html#join" class="nav-cta">加入我们</a>
@@ -606,33 +561,40 @@
     </div>
   </div>
 
-  <!-- ============ FAQ (SEO) ============ -->
-  <section class="eco-faq-section">
-    <h2>常见问题</h2>
+  <!-- ============ FAQ (与首页一致) ============ -->
+  <section class="section section-faq">
+    <div class="container">
+      <div class="section-head center">
+        <h2 class="section-title">常见问题</h2>
+        <p class="section-sub">了解品牌关系与参与方式</p>
+      </div>
 
-    <div class="faq-item" onclick="this.classList.toggle('open')">
-      <div class="faq-q">江西 AI 圈和 OPC 联盟是什么关系？</div>
-      <div class="faq-a">江西 AI 圈是整个江西地区 AI 社群的顶层平台和资源枢纽，而 OPC（One-Person Company / 一人公司）联盟是其旗下专注于「超级个体」培养的子品牌。OPC 联盟通过标准化课件、实战项目和商业闭环，帮助个人从打工者转型为独立运营的一人公司创业者。两者之间是「人才供给 + 能力提升」的双向联动关系。</div>
-    </div>
+      <div class="faq-grid">
+        <div class="faq-item">
+          <h3>江西 AI 圈和 OPC 联盟是什么关系？</h3>
+          <p>江西 AI 圈是整个江西地区 AI 社群的顶层平台和资源枢纽，而 OPC（One-Person Company）联盟是其旗下专注于「超级个体」培养的子品牌。OPC 联盟通过标准化课件、实战项目和商业闭环，帮助个人从打工者转型为独立运营的一人公司创业者。</p>
+        </div>
 
-    <div class="faq-item" onclick="this.classList.toggle('open')">
-      <div class="faq-q">赣客松是什么？和其他黑客松有什么区别？</div>
-      <div class="faq-a">赣客松（GanKeSong）是江西本土首个聚焦 AI 创新的黑客松品牌。与传统黑客松不同，赣客松强调「真实业务需求驱动」——企业提出真需求，开发者用 AI 工具给出真方案，最终实现真落地。它既是技术竞赛，也是人才发现和项目孵化的平台。赣客松与南昌 AI 夜校之间存在「项目孵化 → 实践学习」的协作关系。</div>
-    </div>
+        <div class="faq-item">
+          <h3>赣客松是什么？和其他黑客松有什么区别？</h3>
+          <p>赣客松是江西本土首个聚焦 AI 创新的黑客松品牌。与传统黑客松不同，赣客松强调「真实业务需求驱动」——企业提出真需求，开发者用 AI 工具给出真方案，最终实现真落地。它既是技术竞赛，也是人才发现和项目孵化的平台。</p>
+        </div>
 
-    <div class="faq-item" onclick="this.classList.toggle('open')">
-      <div class="faq-q">南昌 AI 夜校适合什么人参加？</div>
-      <div class="faq-a">南昌 AI 夜校面向所有对 AI 感兴趣的人群，无论你是零基础入门者、想提升效率的职场人，还是有志成为 OPC 的创业者。夜校提供 AI 工具实操、智能体开发、AIGC 应用等课程，注重实战而非理论。它是南昌 AI 圈旗下的子品牌和学习平台。</div>
-    </div>
+        <div class="faq-item">
+          <h3>南昌 AI 夜校适合什么人参加？</h3>
+          <p>南昌 AI 夜校面向所有对 AI 感兴趣的人群，无论你是零基础入门者、想提升效率的职场人，还是有志成为 OPC 的创业者。夜校提供 AI 工具实操、智能体开发、AIGC 应用等课程，注重实战而非理论。</p>
+        </div>
 
-    <div class="faq-item" onclick="this.classList.toggle('open')">
-      <div class="faq-q">我想加入江西 AI 圈生态，应该从哪个入口开始？</div>
-      <div class="faq-a">推荐从首页填写入会表单开始。我们会根据你的身份（企业主 / AI 从业者 / 学生 / OPC 创业者 / 政企人员）匹配最适合你的入口——可能是南昌 AI 圈线下活动、赣客松赛事报名、AI 夜校课程，或是 OPC 联盟的深度培养计划。</div>
-    </div>
+        <div class="faq-item">
+          <h3>我想加入江西 AI 圈生态，应该从哪个入口开始？</h3>
+          <p>推荐从首页填写入会表单开始。我们会根据你的身份（企业主 / AI 从业者 / 学生 / OPC 创业者 / 政企人员）匹配最适合你的入口——可能是南昌 AI 圈线下活动、赣客松赛事报名、AI 夜校课程，或是 OPC 联盟的深度培养计划。</p>
+        </div>
 
-    <div class="faq-item" onclick="this.classList.toggle('open')">
-      <div class="faq-q">目前江西 AI 圈覆盖了哪些城市？</div>
-      <div class="faq-a">目前已点亮南昌、九江、赣州、宜春、抚州、景德镇 6 个核心城市，并设有北京、上海、广州、深圳、杭州等省外飞地社群。2026 年的目标是覆盖江西全部 11 个地级市，并同步拓展海外江西 AI 人的联络网。</div>
+        <div class="faq-item">
+          <h3>目前江西 AI 圈覆盖了哪些城市？</h3>
+          <p>目前已点亮南昌、九江、赣州、宜春、抚州、景德镇 6 个核心城市，并设有北京、上海、广州、深圳、杭州等省外飞地社群。2026 年的目标是覆盖江西全部 11 个地级市，并同步拓展海外江西 AI 人的联络网。</p>
+        </div>
+      </div>
     </div>
   </section>
 
