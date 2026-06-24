@@ -649,6 +649,106 @@ img { max-width: 100%; display: block; }
 }
 .value-cta:hover { color: var(--soil-700); }
 
+/* ============ PORTALS ============ */
+.section-portals { background: #fff; }
+.portal-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-top: 50px;
+}
+.portal-card {
+  position: relative;
+  padding: 32px 28px;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(21, 17, 12, 0.08);
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  transition: transform .3s, box-shadow .3s, border-color .3s;
+  overflow: hidden;
+  isolation: isolate;
+}
+.portal-card:hover {
+  transform: translateY(-7px);
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(232, 69, 26, 0.25);
+}
+.portal-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, var(--soil-500), var(--soil-700));
+  z-index: 1;
+}
+.portal-card.portal-eco::before { background: linear-gradient(90deg, #e8451a, #ff6a3d); }
+.portal-card.portal-talent::before { background: linear-gradient(90deg, #2b6df7, #00e0d0); }
+.portal-card.portal-service::before { background: linear-gradient(90deg, #7d4dff, #ffb547); }
+.portal-card.portal-about::before { background: linear-gradient(90deg, #15110c, #5b544a); }
+
+.portal-num {
+  position: absolute;
+  top: 18px; right: 20px;
+  font-family: var(--font-serif);
+  font-size: 42px;
+  font-weight: 900;
+  color: var(--ink-100);
+  line-height: 1;
+  z-index: 0;
+}
+.portal-icon {
+  width: 56px; height: 56px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, var(--soil-500), var(--soil-700));
+  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 20px;
+  box-shadow: 0 10px 20px -8px rgba(232, 69, 26, 0.5);
+  position: relative;
+  z-index: 1;
+}
+.portal-icon svg { width: 28px; height: 28px; }
+.portal-card.portal-talent .portal-icon { background: linear-gradient(135deg, #2b6df7, #00e0d0); box-shadow: 0 10px 20px -8px rgba(43, 109, 247, 0.45); }
+.portal-card.portal-service .portal-icon { background: linear-gradient(135deg, #7d4dff, #ffb547); box-shadow: 0 10px 20px -8px rgba(125, 77, 255, 0.45); }
+.portal-card.portal-about .portal-icon { background: linear-gradient(135deg, #15110c, #5b544a); box-shadow: 0 10px 20px -8px rgba(21, 17, 12, 0.45); }
+
+.portal-card h3 {
+  font-family: var(--font-serif);
+  font-size: 21px;
+  font-weight: 800;
+  color: var(--ink-900);
+  margin: 0 0 10px;
+  position: relative;
+  z-index: 1;
+}
+.portal-card p {
+  font-size: 14px;
+  color: var(--ink-500);
+  line-height: 1.65;
+  margin: 0 0 22px;
+  flex: 1;
+  position: relative;
+  z-index: 1;
+}
+.portal-cta {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--soil-600);
+  position: relative;
+  z-index: 1;
+  transition: gap .2s, color .2s;
+}
+.portal-card:hover .portal-cta { color: var(--soil-700); }
+
+@media (max-width: 1100px) {
+  .portal-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .portal-grid { grid-template-columns: 1fr; }
+  .portal-card { padding: 26px 22px; }
+}
+
 /* ============ BRAND MATRIX ============ */
 .section-brands { background: #fff; }
 .brand-grid {
@@ -2018,4 +2118,103 @@ img { max-width: 100%; display: block; }
   .qr-uses { grid-template-columns: 1fr; }
   .section-title { font-size: clamp(20px, 6vw, 28px); }
   .section-title br { display: none; }
+}
+
+/* ============ PAGE HERO (子页面通用头部) ============ */
+.page-hero {
+  padding: 120px 0 64px;
+  background: var(--soil-50, #faf8f5);
+  border-bottom: 1px solid rgba(21,17,12,.06);
+}
+.page-hero h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 4.5vw, 52px);
+  font-weight: 900;
+  line-height: 1.2;
+  color: var(--ink-900);
+  margin: 16px 0 20px;
+}
+.page-hero-sub {
+  font-size: clamp(15px, 1.8vw, 18px);
+  color: var(--ink-500);
+  max-width: 600px;
+  line-height: 1.7;
+}
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--ink-400);
+}
+.breadcrumb a { color: var(--soil-500); text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+.breadcrumb span { color: var(--ink-300); }
+
+/* ============ MILESTONE LIST (关于我们 - 成长足迹) ============ */
+.milestone-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  max-width: 760px;
+  margin: 0 auto;
+  position: relative;
+  padding-left: 32px;
+}
+.milestone-list::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--soil-500), var(--soil-200));
+}
+.milestone-item {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+  padding: 28px 0;
+  border-bottom: 1px solid rgba(21,17,12,.06);
+  position: relative;
+}
+.milestone-item::before {
+  content: '';
+  position: absolute;
+  left: -36px;
+  top: 36px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--soil-500);
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 2px var(--soil-300);
+}
+.milestone-item:last-child { border-bottom: none; }
+.milestone-year {
+  font-family: var(--font-serif);
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--soil-500);
+  min-width: 64px;
+  line-height: 1;
+  padding-top: 4px;
+}
+.milestone-content h3 {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ink-900);
+  margin: 0 0 8px;
+}
+.milestone-content p {
+  font-size: 14.5px;
+  color: var(--ink-500);
+  line-height: 1.7;
+  margin: 0;
+}
+@media (max-width: 640px) {
+  .milestone-item { flex-direction: column; gap: 8px; }
+  .milestone-year { font-size: 22px; }
+  .page-hero { padding: 100px 0 48px; }
 }

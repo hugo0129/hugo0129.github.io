@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /image/
 
 Sitemap: https://jiangxiai.top/sitemap.xml
