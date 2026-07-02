@@ -153,7 +153,7 @@
       const target = list[lbIdx];
       const img = target.querySelector('img');
       const cap = target.querySelector('figcaption');
-      lbImg.src = img.src;
+      lbImg.src = img.currentSrc || img.src;
       lbImg.alt = img.alt;
       lbCap.textContent = cap ? cap.textContent.trim() : '';
       lb.classList.add('open');
