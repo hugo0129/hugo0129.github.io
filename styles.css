@@ -2943,3 +2943,141 @@ img { max-width: 100%; display: block; }
   .opc-space-spec { padding: 9px 12px; gap: 4px; }
   .opc-space-highlight { font-size: 11px; padding: 4px 9px; }
 }
+
+/* ====================================================
+   AI 日报 · section-aidaily
+   ==================================================== */
+.section-aidaily {
+  padding: 80px 0;
+  background: var(--bg, #f8f5f1);
+}
+.aidaily-banner {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 48px;
+  align-items: center;
+  border-radius: 28px;
+  padding: 56px 48px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  color: #fff;
+}
+.aidaily-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 25% 30%, rgba(74,125,247,0.18), transparent 55%),
+              radial-gradient(ellipse at 80% 75%, rgba(217,119,87,0.14), transparent 50%);
+  pointer-events: none;
+}
+.aidaily-content { position: relative; z-index: 1; }
+.aidaily-content .section-tag.light {
+  color: rgba(255,255,255,0.65);
+}
+.aidaily-content .section-title.light {
+  color: #fff;
+  font-size: clamp(26px, 4vw, 38px);
+  margin: 12px 0 16px;
+}
+.aidaily-desc {
+  font-size: 15px;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.75);
+  max-width: 520px;
+  margin-bottom: 24px;
+}
+.aidaily-sources {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+.aidaily-sources span {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 5px 12px;
+  border-radius: 100px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.8);
+}
+.aidaily-sources span.more {
+  background: rgba(74,125,247,0.15);
+  border-color: rgba(74,125,247,0.3);
+  color: #8ab4ff;
+}
+.aidaily-btn {
+  font-size: 15px;
+  padding: 13px 28px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* preview card */
+.aidaily-preview { position: relative; z-index: 1; }
+.adp-card {
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 18px;
+  padding: 24px;
+}
+.adp-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.adp-date { display: flex; flex-direction: column; gap: 2px; }
+.adp-label { font-size: 11px; color: rgba(255,255,255,0.5); letter-spacing: 1px; }
+.adp-day { font-size: 18px; font-weight: 700; color: #fff; }
+.adp-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 100px;
+  background: linear-gradient(135deg, #4a7df7, #2b6df7);
+  color: #fff;
+}
+.adp-list { list-style: none; margin: 0; padding: 0; }
+.adp-list li {
+  display: grid;
+  grid-template-columns: 36px 1fr auto;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.adp-list li:last-child { border-bottom: 0; }
+.adp-score {
+  font-family: var(--serif);
+  font-size: 16px;
+  font-weight: 800;
+  color: #ffb547;
+  text-align: center;
+}
+.adp-cat { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.9); }
+.adp-src { font-size: 11px; color: rgba(255,255,255,0.4); }
+.adp-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+}
+
+@media (max-width: 900px) {
+  .aidaily-banner { grid-template-columns: 1fr; gap: 32px; padding: 40px 32px; }
+}
+@media (max-width: 540px) {
+  .aidaily-banner { padding: 32px 22px; border-radius: 20px; }
+  .aidaily-content .section-title.light { font-size: 24px; }
+  .adp-card { padding: 18px; }
+}

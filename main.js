@@ -41,7 +41,7 @@
 
   // ---------- Reveal on scroll ----------
   const revealEls = document.querySelectorAll(
-    '.reveal, .section-head, .about-grid, .value-card, .brand-card, .night-cards, .night-illust, .solution, .logos-strip, .member, .partner-card, .city-banner, .cta-head, .cta-qr, .cta-form, .gallery-filters, .gallery-grid, .opc-space-card, .demand-card, .opc-stats-bar'
+    '.reveal, .section-head, .about-grid, .value-card, .brand-card, .night-cards, .night-illust, .solution, .logos-strip, .member, .partner-card, .city-banner, .cta-head, .cta-qr, .cta-form, .gallery-filters, .gallery-grid, .opc-space-card, .demand-card, .opc-stats-bar, .aidaily-banner'
   );
   revealEls.forEach(el => el.classList.add('reveal'));
 
@@ -87,6 +87,15 @@
       window.scrollTo({ top, behavior: 'smooth' });
     });
   });
+
+  // ---------- AI 日报日期动态显示 ----------
+  const aidailyDate = document.getElementById('aidailyDate');
+  if (aidailyDate) {
+    const now = new Date();
+    const mm = String(now.getMonth() + 1).padStart(2, '0');
+    const dd = String(now.getDate()).padStart(2, '0');
+    aidailyDate.textContent = `${mm}月${dd}日`;
+  }
 
 
   // ---------- Gallery filter & lightbox (only on pages with gallery) ----------
