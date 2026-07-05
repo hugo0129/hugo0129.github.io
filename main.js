@@ -1,4 +1,4 @@
-// 江西 AI 圈 & OPC 联盟 — interactions
+// 江西 AI OPC 联盟 — interactions
 
 (function () {
   'use strict';
@@ -41,7 +41,7 @@
 
   // ---------- Reveal on scroll ----------
   const revealEls = document.querySelectorAll(
-    '.reveal, .section-head, .about-grid, .value-card, .brand-card, .night-cards, .night-illust, .solution, .logos-strip, .member, .partner-card, .city-banner, .cta-head, .cta-qr, .cta-form, .gallery-filters, .gallery-grid'
+    '.reveal, .section-head, .about-grid, .value-card, .brand-card, .night-cards, .night-illust, .solution, .logos-strip, .member, .partner-card, .city-banner, .cta-head, .cta-qr, .cta-form, .gallery-filters, .gallery-grid, .opc-space-card, .demand-card, .opc-stats-bar'
   );
   revealEls.forEach(el => el.classList.add('reveal'));
 
