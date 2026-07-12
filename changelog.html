@@ -96,13 +96,22 @@
       </a>
       <div class="nav-links">
         <a href="index.html">首页</a>
-        <a href="ecosystem.html">生态体系</a>
+        <a href="ecosystem.html">AI 生态</a>
         <a href="opc.html">OPC 社区</a>
-        <a href="talents.html">江西 AI 人才</a>
-        <a href="about.html">关于我们</a>
-        <a href="services.html">企业服务</a>
-        <a href="aidaily.html">AI 日报</a>
-        <a href="index.html#join" class="nav-cta">加入我们</a>
+        <a href="news.html">活动/新闻</a>
+        <a href="services.html">服务</a>
+        <div class="nav-dropdown">
+          <button class="nav-drop-trigger" type="button" aria-haspopup="true" aria-expanded="false" style="color: var(--soil-500);">
+            更多 <span class="nav-drop-caret" aria-hidden="true"></span>
+          </button>
+          <div class="nav-drop-menu" role="menu">
+            <a href="about.html" role="menuitem">关于我们</a>
+            <a href="talents.html" role="menuitem">名人榜</a>
+            <a href="aidaily.html" role="menuitem">AI 日报</a>
+            <a href="changelog.html" role="menuitem" class="active">更新日志</a>
+          </div>
+        </div>
+        <a href="#join" class="nav-cta">加入我们</a>
       </div>
       <button class="nav-toggle" aria-label="菜单" id="navToggle">
         <span></span><span></span><span></span>
@@ -124,11 +133,11 @@
       </p>
       <div class="changelog-stats">
         <div class="changelog-stat">
-          <strong>8</strong>
+          <strong>9</strong>
           <span>页面总数</span>
         </div>
         <div class="changelog-stat">
-          <strong>v2.3</strong>
+          <strong>v2.5</strong>
           <span>当前版本</span>
         </div>
         <div class="changelog-stat">
@@ -143,6 +152,49 @@
   <section style="padding:60px 0 80px;">
     <div class="container">
       <div class="changelog-timeline">
+
+        <!-- v2.5 -->
+        <div class="cl-item reveal">
+          <div class="cl-dot"></div>
+          <div class="cl-card">
+            <div class="cl-card-head">
+              <span class="cl-version">v2.5</span>
+              <span class="cl-date">2026-07-12</span>
+            </div>
+            <h3 class="cl-title">导航对调 &amp; 首页内容修复</h3>
+            <ul class="cl-list">
+              <li><span class="cl-tag cl-tag-update">优化</span>导航栏对调：活动/新闻提升至平铺位，名人榜移入"更多"下拉（高频内容优先）</li>
+              <li><span class="cl-tag cl-tag-update">优化</span>首页五大入口卡片顺序同步调整（生态→OPC→活动/新闻→服务→人才）</li>
+              <li><span class="cl-tag cl-tag-update">优化</span>首页 OPC 价值卡片链接从 services.html#brands 修正为 opc.html</li>
+              <li><span class="cl-tag cl-tag-fix">修复</span>opc.html 导航标签残留"社区"未替换为"OPC 社区"</li>
+              <li><span class="cl-tag cl-tag-fix">修复</span>404.html 导航下拉触发器使用 span 而非 button，且缺少移动端汉堡菜单</li>
+              <li><span class="cl-tag cl-tag-fix">修复</span>首页 Section 编号错乱（活动回顾 04→03，城市主理人 03→04）</li>
+              <li><span class="cl-tag cl-tag-fix">修复</span>首页活动回顾区副标题重复</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- v2.4 -->
+        <div class="cl-item reveal">
+          <div class="cl-dot"></div>
+          <div class="cl-card">
+            <div class="cl-card-head">
+              <span class="cl-version">v2.4</span>
+              <span class="cl-date">2026-07-12</span>
+            </div>
+            <h3 class="cl-title">活动/新闻页上线 &amp; 导航架构重构</h3>
+            <ul class="cl-list">
+              <li><span class="cl-tag cl-tag-new">新增</span>活动/新闻页面（news.html），时间线展示 24 条活动回顾与媒体报道</li>
+              <li><span class="cl-tag cl-tag-new">新增</span>news-data.js 数据文件，支持按类型筛选（官媒报道 / 公众号推文）与时间排序</li>
+              <li><span class="cl-tag cl-tag-new">新增</span>sitemap.xml 添加 news.html 条目</li>
+              <li><span class="cl-tag cl-tag-update">优化</span>导航栏重构：5 平铺（首页/AI 生态/OPC 社区/名人榜/服务）+ 更多下拉（关于/活动新闻/AI日报/更新日志）</li>
+              <li><span class="cl-tag cl-tag-update">优化</span>导航项名称精简：AI 生态、OPC 社区、名人榜</li>
+              <li><span class="cl-tag cl-tag-update">优化</span>品牌矩阵去重，Footer 链接统一指向生态页</li>
+              <li><span class="cl-tag cl-tag-update">优化</span>首页入口卡片第 5 卡从"关于我们"调整为"活动/新闻"</li>
+              <li><span class="cl-tag cl-tag-fix">修复</span>下拉菜单 hover 断联问题（添加透明桥接区填补触发器与菜单间隙）</li>
+            </ul>
+          </div>
+        </div>
 
         <!-- v2.3 -->
         <div class="cl-item reveal">
@@ -263,17 +315,18 @@
             <li><a href="about.html">关于我们</a></li>
             <li><a href="about.html#team">核心团队</a></li>
             <li><a href="changelog.html">更新日志</a></li>
+            <li><a href="news.html">活动/新闻</a></li>
             <li><a href="aidaily.html">AI 日报</a></li>
           </ul>
         </div>
         <div class="footer-col">
           <h5>品牌矩阵</h5>
           <ul>
-            <li><a href="services.html#brands">江西 AI 圈</a></li>
-            <li><a href="services.html#brands">江西 OPC 联盟</a></li>
-            <li><a href="services.html#brands">南昌 AI 圈</a></li>
-            <li><a href="services.html#brands">赣客松</a></li>
-            <li><a href="services.html#brands">南昌 AI 夜校</a></li>
+            <li><a href="ecosystem.html">江西 AI 圈</a></li>
+            <li><a href="ecosystem.html">江西 OPC 联盟</a></li>
+            <li><a href="ecosystem.html">南昌 AI 圈</a></li>
+            <li><a href="ecosystem.html">赣客松</a></li>
+            <li><a href="ecosystem.html">南昌 AI 夜校</a></li>
           </ul>
         </div>
         <div class="footer-col">

@@ -22,6 +22,30 @@
     );
   }
 
+  // ---------- Nav dropdown (click to toggle on touch / mobile) ----------
+  document.querySelectorAll('.nav-dropdown').forEach((dd) => {
+    const trigger = dd.querySelector('.nav-drop-trigger');
+    if (!trigger) return;
+    trigger.addEventListener('click', (e) => {
+      // On desktop, hover handles it; on touch / mobile, toggle open
+      if (window.matchMedia('(max-width: 800px)').matches || e.detail > 0) {
+        e.preventDefault();
+        const isOpen = dd.classList.toggle('open');
+        trigger.setAttribute('aria-expanded', String(isOpen));
+      }
+    });
+  });
+  // Close dropdown when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.nav-dropdown')) {
+      document.querySelectorAll('.nav-dropdown.open').forEach((dd) => {
+        dd.classList.remove('open');
+        const t = dd.querySelector('.nav-drop-trigger');
+        if (t) t.setAttribute('aria-expanded', 'false');
+      });
+    }
+  });
+
   // ---------- Counter animation ----------
   const counters = document.querySelectorAll('.hero-stats strong[data-target]');
   const animateCounter = (el) => {
@@ -194,5 +218,109 @@
       else if (e.key === 'ArrowLeft') stepLb(-1);
       else if (e.key === 'ArrowRight') stepLb(1);
     });
+  }
+
+  // ---------- News list render (only on news page) ----------
+  const newsTimeline = document.getElementById('newsTimeline');
+  if (newsTimeline) {
+    const newsEmpty = document.getElementById('newsEmpty');
+    const newsFilters = document.querySelectorAll('.news-filter');
+    const newsTotalCount = document.getElementById('newsTotalCount');
+    const newsMediaCount = document.getElementById('newsMediaCount');
+    const newsWechatCount = document.getElementById('newsWechatCount');
+    let newsData = [];
+    let newsActiveFilter = 'all';
+
+    const badgeLabels = {
+      media: '官媒报道',
+      wechat: '公众号',
+      event: '活动预告',
+      voice: '行业发声'
+    };
+
+    const formatDate = (dateStr) => {
+      const d = new Date(dateStr);
+      const yyyy = d.getFullYear();
+      const mm = String(d.getMonth() + 1).padStart(2, '0');
+      const dd = String(d.getDate()).padStart(2, '0');
+      return yyyy + '.' + mm + '.' + dd;
+    };
+
+    const renderNews = (data) => {
+      newsTimeline.innerHTML = '';
+      if (!data.length) {
+        newsEmpty.style.display = 'block';
+        return;
+      }
+      newsEmpty.style.display = 'none';
+
+      data.forEach((item) => {
+        const div = document.createElement('div');
+        div.className = 'news-item reveal' + (item.featured ? ' featured' : '');
+        div.dataset.type = item.sourceType;
+
+        const badgeClass = 'news-badge-' + item.sourceType;
+        const badgeLabel = badgeLabels[item.sourceType] || item.sourceType;
+
+        div.innerHTML =
+          '<div class="news-dot"></div>' +
+          '<a class="news-card" href="' + item.url + '" target="_blank" rel="noopener">' +
+            '<div class="news-card-head">' +
+              '<span class="news-date">' + formatDate(item.date) + '</span>' +
+              '<span class="news-badge ' + badgeClass + '">' + badgeLabel + '</span>' +
+              '<span class="news-source">' + item.source + '</span>' +
+              (item.featured ? '<span class="news-featured-tag">置顶</span>' : '') +
+            '</div>' +
+            '<h3 class="news-title">' + item.title + '</h3>' +
+            (item.summary ? '<p class="news-summary">' + item.summary + '</p>' : '') +
+            '<span class="news-link">阅读原文 →</span>' +
+          '</a>';
+
+        newsTimeline.appendChild(div);
+      });
+
+      // Reveal animation
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              io.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        newsTimeline.querySelectorAll('.news-item').forEach(el => io.observe(el));
+      } else {
+        newsTimeline.querySelectorAll('.news-item').forEach(el => el.classList.add('visible'));
+      }
+    };
+
+    const applyNewsFilter = (filter) => {
+      newsActiveFilter = filter;
+      newsFilters.forEach(f => f.classList.toggle('active', f.dataset.filter === filter));
+      const filtered = filter === 'all'
+        ? newsData
+        : newsData.filter(item => item.sourceType === filter);
+      renderNews(filtered);
+    };
+
+    newsFilters.forEach(f => {
+      f.addEventListener('click', () => applyNewsFilter(f.dataset.filter));
+    });
+
+    // Render from inline data (no fetch needed — works with file:// protocol)
+    if (window.NEWS_DATA && Array.isArray(window.NEWS_DATA)) {
+      // Sort by date descending
+      newsData = window.NEWS_DATA.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+      // Update stats
+      if (newsTotalCount) newsTotalCount.textContent = newsData.length;
+      if (newsMediaCount) newsMediaCount.textContent = newsData.filter(i => i.sourceType === 'media').length;
+      if (newsWechatCount) newsWechatCount.textContent = newsData.filter(i => i.sourceType === 'wechat').length;
+
+      renderNews(newsData);
+    } else {
+      newsTimeline.innerHTML = '<div class="news-loading">数据加载失败，请刷新重试。</div>';
+    }
   }
 })();

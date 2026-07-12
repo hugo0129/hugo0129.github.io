@@ -1,0 +1,18 @@
+# 依赖 / 开发工具
+remotion-videos/
+node_modules/
+package-lock.json
+
+# 系统 / 编辑器
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+
+# 临时文件
+*.log
+*.tmp
+.cache/
