@@ -14,7 +14,7 @@
 set -e
 
 # ---------- 配置 ----------
-GIT_REPO="git@github.com:hugo0129/jiangxiai.github.io.git"
+GIT_REPO="git@github.com:hugo0129/hugo0129.github.io.git"
 DEPLOY_DIR="/var/www/jiangxiai.top"
 TMP_DIR="/tmp/jiangxiai-deploy"
 BRANCH="main"
