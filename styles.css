@@ -2851,6 +2851,11 @@ img { max-width: 100%; display: block; }
   color: #d97706;
   border: 1px solid rgba(245, 158, 11, 0.15);
 }
+.opc-space-status.renamed {
+  background: rgba(59, 130, 246, 0.08);
+  color: #2563eb;
+  border: 1px solid rgba(59, 130, 246, 0.14);
+}
 .opc-space-card h3 {
   font-family: var(--font-serif);
   font-size: 21px;
@@ -2870,10 +2875,6 @@ img { max-width: 100%; display: block; }
   color: var(--ink-500);
   line-height: 1.75;
   margin: 0 0 14px;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 
 /* 地址行 — 统一样式 */
@@ -2891,6 +2892,36 @@ img { max-width: 100%; display: block; }
   height: 14px;
   flex-shrink: 0;
   opacity: 0.55;
+}
+
+/* OPC 社区资料字段 */
+.opc-space-details {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  border-top: 1px solid rgba(21, 17, 12, 0.06);
+}
+.opc-space-details > div {
+  display: grid;
+  grid-template-columns: 104px minmax(0, 1fr);
+  gap: 14px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(21, 17, 12, 0.06);
+}
+.opc-space-details > div:last-child {
+  border-bottom: 0;
+}
+.opc-space-details dt {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--soil-600);
+  line-height: 1.65;
+}
+.opc-space-details dd {
+  margin: 0;
+  font-size: 13px;
+  color: var(--ink-500);
+  line-height: 1.65;
 }
 
 /* 特色亮点条 */
@@ -3316,6 +3347,7 @@ img { max-width: 100%; display: block; }
   .opc-space-policy li { padding-left: 16px; }
   .opc-space-spec { padding: 9px 12px; gap: 4px; }
   .opc-space-highlight { font-size: 11px; padding: 4px 9px; }
+  .opc-space-details > div { grid-template-columns: 1fr; gap: 4px; padding: 10px 0; }
 }
 
 /* ====================================================
