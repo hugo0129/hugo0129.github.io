@@ -36,7 +36,7 @@ jobs:
       - name: Prepare site files
         run: |
           mkdir -p ./site
-          cp -r *.html *.css *.js *.xml *.txt *.png *.svg img/ favicon.png favicon.svg .nojekyll CNAME ./site/ 2>/dev/null || true
+          cp -r *.html *.css *.js *.xml *.txt *.png *.svg img .nojekyll CNAME ./site/ 2>/dev/null || true
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

@@ -33,7 +33,7 @@ window.NEWS_DATA = [
     "sourceType": "wechat",
     "source": "莫西AI",
     "title": "一张图，看懂江西 AI 圈正在共建的本地 AI 生态",
-    "summary": "江西AI圈不只是社群，是一张正在生长的生态地图——串联南昌、赣州、九江等11地市，贯通夜校、赣客松、OPC联盟六大模块，1000+实干者共建。",
+    "summary": "一图说明江西 AI 圈、OPC 联盟、城市活动、赣客松与 AI 夜校的分工和连接方式。",
     "url": "https://mp.weixin.qq.com/s/-iRgQak3PtpbTsMWxRripA",
     "featured": true
   },
@@ -216,7 +216,7 @@ window.NEWS_DATA = [
     "sourceType": "wechat",
     "source": "莫西AI",
     "title": "江西AI圈第1期线下活动精彩回顾｜南昌AI圈的星星之火",
-    "summary": "南昌AI圈第一期线下活动，32人到场，分享Sora2短视频实战和南昌AI圈的初心愿景——让江西抓住AI机遇。",
+    "summary": "南昌 AI 圈第一期线下活动有 30 余人到场，现场分享 AI 短视频实践与本地社群的发起初衷。",
     "url": "https://mp.weixin.qq.com/s/lnQVCRVsgduF2q7U8sJ-jg"
   }
 ];

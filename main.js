@@ -1,7 +1,8 @@
-// 江西 AI OPC 联盟 — interactions
+// 江西 AI 圈 — interactions
 
 (function () {
   'use strict';
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // ---------- Nav scroll state ----------
   const nav = document.getElementById('nav');
@@ -16,10 +17,20 @@
   const toggle = document.getElementById('navToggle');
   const links = document.querySelector('.nav-links');
   if (toggle && links) {
-    toggle.addEventListener('click', () => links.classList.toggle('show'));
+    const setNavOpen = (open) => {
+      links.classList.toggle('show', open);
+      toggle.setAttribute('aria-expanded', String(open));
+    };
+    toggle.addEventListener('click', () => setNavOpen(!links.classList.contains('show')));
     links.querySelectorAll('a').forEach(a =>
-      a.addEventListener('click', () => links.classList.remove('show'))
+      a.addEventListener('click', () => setNavOpen(false))
     );
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && links.classList.contains('show')) {
+        setNavOpen(false);
+        toggle.focus();
+      }
+    });
   }
 
   // ---------- Nav dropdown (click to toggle on touch / mobile) ----------
@@ -45,12 +56,27 @@
       });
     }
   });
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    document.querySelectorAll('.nav-dropdown.open').forEach((dd) => {
+      dd.classList.remove('open');
+      const trigger = dd.querySelector('.nav-drop-trigger');
+      if (trigger) {
+        trigger.setAttribute('aria-expanded', 'false');
+        trigger.focus();
+      }
+    });
+  });
 
   // ---------- Counter animation ----------
   const counters = document.querySelectorAll('.hero-stats strong[data-target]');
   const animateCounter = (el) => {
     const target = parseInt(el.dataset.target, 10);
     const suffix = el.dataset.suffix || '';
+    if (prefersReducedMotion) {
+      el.textContent = target + suffix;
+      return;
+    }
     const duration = 1600;
     const start = performance.now();
     const tick = (now) => {
@@ -108,7 +134,7 @@
       if (!el) return;
       e.preventDefault();
       const top = el.getBoundingClientRect().top + window.scrollY - 60;
-      window.scrollTo({ top, behavior: 'smooth' });
+      window.scrollTo({ top, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
     });
   });
 
@@ -151,8 +177,13 @@
     };
 
     filters.forEach(f => {
+      f.setAttribute('aria-pressed', String(f.classList.contains('active')));
       f.addEventListener('click', () => {
-        filters.forEach(x => x.classList.toggle('active', x === f));
+        filters.forEach(x => {
+          const isActive = x === f;
+          x.classList.toggle('active', isActive);
+          x.setAttribute('aria-pressed', String(isActive));
+        });
         applyFilter(f.dataset.filter);
       });
     });
@@ -177,11 +208,13 @@
 
     // ---------- Lightbox ----------
     let lbIdx = 0;
+    let previousFocus = null;
     let visibleItems = () => items.filter(it => !it.classList.contains('hidden'));
 
-    const openLb = (idx) => {
+    const openLb = (idx, origin = null) => {
       const list = visibleItems();
       if (!list.length) return;
+      const wasOpen = lb.classList.contains('open');
       lbIdx = ((idx % list.length) + list.length) % list.length;
       const target = list[lbIdx];
       const img = target.querySelector('img');
@@ -192,19 +225,37 @@
       lb.classList.add('open');
       lb.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
+      if (!wasOpen) {
+        previousFocus = origin || document.activeElement;
+        lb.querySelector('.lb-close').focus();
+      }
     };
     const closeLb = () => {
+      if (!lb.classList.contains('open')) return;
       lb.classList.remove('open');
       lb.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
+      if (previousFocus && previousFocus.isConnected) previousFocus.focus();
+      previousFocus = null;
     };
     const stepLb = (delta) => openLb(lbIdx + delta);
 
     items.forEach((it) => {
+      const itemImg = it.querySelector('img');
+      it.setAttribute('tabindex', '0');
+      it.setAttribute('role', 'button');
+      it.setAttribute('aria-label', `查看大图：${itemImg?.alt || '活动照片'}`);
       it.addEventListener('click', () => {
         const list = visibleItems();
         const idx = list.indexOf(it);
-        if (idx >= 0) openLb(idx);
+        if (idx >= 0) openLb(idx, it);
+      });
+      it.addEventListener('keydown', (e) => {
+        if (e.key !== 'Enter' && e.key !== ' ') return;
+        e.preventDefault();
+        const list = visibleItems();
+        const idx = list.indexOf(it);
+        if (idx >= 0) openLb(idx, it);
       });
     });
 
@@ -273,7 +324,7 @@
             '</div>' +
             '<h3 class="news-title">' + item.title + '</h3>' +
             (item.summary ? '<p class="news-summary">' + item.summary + '</p>' : '') +
-            '<span class="news-link">阅读原文 →</span>' +
+            '<span class="news-link">阅读原文</span>' +
           '</a>';
 
         newsTimeline.appendChild(div);
@@ -297,7 +348,11 @@
 
     const applyNewsFilter = (filter) => {
       newsActiveFilter = filter;
-      newsFilters.forEach(f => f.classList.toggle('active', f.dataset.filter === filter));
+      newsFilters.forEach(f => {
+        const isActive = f.dataset.filter === filter;
+        f.classList.toggle('active', isActive);
+        f.setAttribute('aria-pressed', String(isActive));
+      });
       const filtered = filter === 'all'
         ? newsData
         : newsData.filter(item => item.sourceType === filter);
@@ -323,4 +378,23 @@
       newsTimeline.innerHTML = '<div class="news-loading">数据加载失败，请刷新重试。</div>';
     }
   }
+
+  // ---------- Conversion signals ----------
+  const sendAnalyticsEvent = (name, params) => {
+    if (typeof window.gtag === 'function') window.gtag('event', name, params);
+  };
+
+  document.querySelectorAll('a').forEach((link) => {
+    const href = link.getAttribute('href') || '';
+    const isPrimaryAction = link.matches('.btn, .nav-cta, .float-cta, .cta-path, .value-cta, .source-link');
+    const isForm = href.includes('feishu.cn/share/base/form');
+    if (!isPrimaryAction && !isForm) return;
+    link.addEventListener('click', () => {
+      sendAnalyticsEvent('cta_click', {
+        cta_text: (link.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 80),
+        cta_target: href.split('?')[0],
+        page_path: window.location.pathname
+      });
+    });
+  });
 })();
