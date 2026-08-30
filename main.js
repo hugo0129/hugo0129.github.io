@@ -283,8 +283,8 @@
     let newsActiveFilter = 'all';
 
     const badgeLabels = {
-      media: '官媒报道',
-      wechat: '公众号',
+      media: '第三方报道',
+      wechat: '社群记录',
       event: '活动预告',
       voice: '行业发声'
     };
@@ -306,28 +306,29 @@
       newsEmpty.style.display = 'none';
 
       data.forEach((item) => {
-        const div = document.createElement('div');
-        div.className = 'news-item reveal' + (item.featured ? ' featured' : '');
-        div.dataset.type = item.sourceType;
+        const article = document.createElement('article');
+        article.className = 'news-item reveal' + (item.featured ? ' featured' : '');
+        article.dataset.type = item.sourceType;
+        article.dataset.newsId = item.id;
 
         const badgeClass = 'news-badge-' + item.sourceType;
         const badgeLabel = badgeLabels[item.sourceType] || item.sourceType;
 
-        div.innerHTML =
-          '<div class="news-dot"></div>' +
+        article.innerHTML =
+          '<div class="news-dot" aria-hidden="true"></div>' +
           '<a class="news-card" href="' + item.url + '" target="_blank" rel="noopener">' +
             '<div class="news-card-head">' +
-              '<span class="news-date">' + formatDate(item.date) + '</span>' +
+              '<time class="news-date" datetime="' + item.date + '">' + formatDate(item.date) + '</time>' +
               '<span class="news-badge ' + badgeClass + '">' + badgeLabel + '</span>' +
               '<span class="news-source">' + item.source + '</span>' +
-              (item.featured ? '<span class="news-featured-tag">置顶</span>' : '') +
+              (item.featured ? '<span class="news-featured-tag">推荐</span>' : '') +
             '</div>' +
             '<h3 class="news-title">' + item.title + '</h3>' +
             (item.summary ? '<p class="news-summary">' + item.summary + '</p>' : '') +
             '<span class="news-link">阅读原文</span>' +
           '</a>';
 
-        newsTimeline.appendChild(div);
+        newsTimeline.appendChild(article);
       });
 
       // Reveal animation
@@ -374,9 +375,29 @@
       if (newsWechatCount) newsWechatCount.textContent = newsData.filter(i => i.sourceType === 'wechat').length;
 
       renderNews(newsData);
-    } else {
+    } else if (!newsTimeline.querySelector('.news-item')) {
       newsTimeline.innerHTML = '<div class="news-loading">数据加载失败，请刷新重试。</div>';
     }
+  }
+
+  // ---------- Friendly links ----------
+  // Keep the same verified partner links on every page without duplicating
+  // the footer markup across all static documents.
+  const footerContainer = document.querySelector('.footer > .container');
+  const footerBottom = footerContainer && footerContainer.querySelector('.footer-bottom');
+  if (footerContainer && footerBottom && !footerContainer.querySelector('.friend-links')) {
+    const friendLinks = document.createElement('nav');
+    friendLinks.className = 'friend-links';
+    friendLinks.setAttribute('aria-label', '友情链接');
+    friendLinks.innerHTML =
+      '<strong>友情链接</strong>' +
+      '<div class="friend-links-list">' +
+        '<a href="https://www.minimaxi.com/" target="_blank" rel="noopener">稀宇 MiniMax</a>' +
+        '<a href="https://www.miaoda.cn/" target="_blank" rel="noopener">百度秒哒</a>' +
+        '<a href="https://www.waytoagi.com/" target="_blank" rel="noopener">WaytoAGI</a>' +
+        '<a href="https://www.opc.city/" target="_blank" rel="noopener">OPCxCity</a>' +
+      '</div>';
+    footerContainer.insertBefore(friendLinks, footerBottom);
   }
 
   // ---------- Conversion signals ----------

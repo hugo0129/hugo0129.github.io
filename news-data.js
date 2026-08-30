@@ -1,5 +1,34 @@
 window.NEWS_DATA = [
   {
+    "id": "news-025",
+    "date": "2026-08-21",
+    "sourceType": "media",
+    "source": "江报培训",
+    "title": "温州OPC大会的江西声音：AI+OPC，是给每个人每座城的新机会",
+    "summary": "江西AI圈、OPCxCity江西代表受邀参加温州人工智能OPC创业生态共建大会，分享江西本地AI与OPC生态的实践。",
+    "url": "https://mp.weixin.qq.com/s/gFMXoXoUMrdIZiPVmRe8kg",
+    "featured": true
+  },
+  {
+    "id": "news-026",
+    "date": "2026-08-19",
+    "sourceType": "media",
+    "source": "温州市人民政府 · 温州日报",
+    "title": "温州为OPC创业者攒了个“生态局”",
+    "summary": "温州报道人工智能OPC创业生态共建大会：全国十城社区共同发起共建公约，来自江西的OPCxCity主理人莫西到场交流。",
+    "url": "https://www.wenzhou.gov.cn/col/col1217831/art/2026/art_0fb4351fb4f9461a8d1c9ca104e210f2.html",
+    "featured": true
+  },
+  {
+    "id": "news-027",
+    "date": "2026-08-17",
+    "sourceType": "media",
+    "source": "百度秒哒",
+    "title": "江西AI圈 × 百度秒哒合作记录",
+    "summary": "江西AI圈与百度秒哒的公开合作记录，原文标题与发布账号以微信页面显示为准。",
+    "url": "https://mp.weixin.qq.com/s/XCOQOa3ElnlrnGtL2zxqYA"
+  },
+  {
     "id": "news-001",
     "date": "2026-07-10",
     "sourceType": "media",
@@ -83,6 +112,15 @@ window.NEWS_DATA = [
     "url": "https://mp.weixin.qq.com/s/jnUMIzq4zYOKoHUrsddSlw"
   },
   {
+    "id": "news-028",
+    "date": "2026-06-01",
+    "sourceType": "media",
+    "source": "大江新闻 · 江西日报",
+    "title": "抢占风口！2026南昌人工智能OPC创业者生态大会启幕",
+    "summary": "5月30日大会由南昌市西湖区人民政府指导、江西省互联网协会主办，现场百余名行业专家、创业者与高校师生共探AI落地。",
+    "url": "https://jx.ifeng.com/c/8tZKKo8iFqp"
+  },
+  {
     "id": "news-010",
     "date": "2026-05-24",
     "sourceType": "wechat",
@@ -110,6 +148,24 @@ window.NEWS_DATA = [
     "url": "https://mp.weixin.qq.com/s/LwvcRv7rVPx5nCV1Rot9GQ"
   },
   {
+    "id": "news-029",
+    "date": "2026-05-15",
+    "sourceType": "media",
+    "source": "活动行 · 浦光星奕",
+    "title": "AIGC内容产业城市巡回活动-南昌站",
+    "summary": "红谷滩区人民政府指导的AIGC内容产业巡回活动南昌站；活动页列明江西AI圈与南昌AI圈为协办单位。",
+    "url": "https://www.huodongxing.com/event/8857451422800"
+  },
+  {
+    "id": "news-030",
+    "date": "2026-05-11",
+    "sourceType": "media",
+    "source": "江西软件职业技术大学",
+    "title": "第23期WaytoAGI AI切磋大会在我校成功举办",
+    "summary": "江西软件职业技术大学联合WaytoAGI社区、南昌AI圈共同承办AI切磋大会，围绕AI工作流展开实战交流。",
+    "url": "https://dei.jxuspt.com/xyxw/474.html"
+  },
+  {
     "id": "news-013",
     "date": "2026-05-06",
     "sourceType": "media",
@@ -117,6 +173,16 @@ window.NEWS_DATA = [
     "title": "江西AI圈见面会：不说原理，只教你怎么用AI赚到第一个100块",
     "summary": "江西日报报道江西AI圈见面会，聚焦AI实战变现，用AI赚到第一个100块。",
     "url": "https://mp.weixin.qq.com/s/foOXQKIBMUCUa52GMkm58g"
+  },
+  {
+    "id": "news-031",
+    "date": "2026-04-30",
+    "sourceType": "media",
+    "source": "科技日报",
+    "title": "江西OPC创业者交流活动在南昌举办",
+    "summary": "科技日报关注江西OPC创业者交流活动，记录创业者围绕政策、AI技术应用、商业落地与资源合作展开交流。",
+    "url": "https://www.stdaily.com/web/gdxw/2026-04/30/content_510706.html",
+    "featured": true
   },
   {
     "id": "news-014",
@@ -147,12 +213,21 @@ window.NEWS_DATA = [
     "url": "https://mp.weixin.qq.com/s/TS0EA_2Id5_Q0hGF4BAtig"
   },
   {
+    "id": "news-032",
+    "date": "2026-04-08",
+    "sourceType": "media",
+    "source": "凤凰网数字经济",
+    "title": "“虾涌鹭岛·智启新章”Openclaw × OPC经验分享会在厦门成功举办",
+    "summary": "厦门OpenClaw × OPC经验分享会由OPCxCity等联合支持；南昌AI圈作为联合支持方参与跨城生态连接。",
+    "url": "https://web3.ifeng.com/c/8s9zJh5Qzto"
+  },
+  {
     "id": "news-017",
     "date": "2026-03-10",
     "sourceType": "media",
-    "source": "今视频",
-    "title": "江西AI圈相关报道",
-    "summary": "今视频（江西广电）报道江西AI圈AI相关活动与本土AI生态发展。",
+    "source": "今视频（江西网络广播电视台）",
+    "title": "科技赋能 智汇洪城：江西首场OpenClaw x OPC线下活动在南昌圆满落幕",
+    "summary": "今视频报道3月8日江西首场OpenClaw × OPC线下活动，记录技术实操、嘉宾分享及MiniMax对活动的支持。",
     "url": "https://share.jxgdw.com/share/media/2991127"
   },
   {

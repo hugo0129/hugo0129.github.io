@@ -1281,6 +1281,59 @@ img { max-width: 100%; display: block; }
 
 /* ============ PARTNER ============ */
 .section-partner { background: linear-gradient(180deg, #fff 0%, var(--bg) 100%); }
+.official-partners {
+  display: grid;
+  grid-template-columns: minmax(220px, .8fr) minmax(0, 2fr);
+  margin-bottom: 28px;
+  border: 1px solid var(--ink-900);
+  background: #fff;
+}
+.official-partners-copy {
+  padding: 26px;
+  border-right: 1px solid var(--ink-900);
+}
+.official-partners-copy > span {
+  color: var(--soil-600);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .12em;
+}
+.official-partners-copy h3 {
+  margin: 7px 0 8px;
+  color: var(--ink-900);
+  font-family: var(--font-serif);
+  font-size: 22px;
+}
+.official-partners-copy p {
+  margin: 0;
+  color: var(--ink-500);
+  font-size: 13px;
+  line-height: 1.65;
+}
+.partner-roster {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-self: stretch;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.partner-roster li {
+  display: flex;
+  min-height: 72px;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  border-right: 1px solid #d4d4d7;
+  border-bottom: 1px solid #d4d4d7;
+  color: var(--ink-900);
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.4;
+  text-align: center;
+}
+.partner-roster li:nth-child(3n) { border-right: 0; }
+.partner-roster li:nth-last-child(-n + 3) { border-bottom: 0; }
 .partner-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -1323,6 +1376,59 @@ img { max-width: 100%; display: block; }
   border-top: 1px dashed rgba(232, 69, 26, 0.2);
   padding-top: 12px;
   margin-top: 14px !important;
+}
+
+.home-v3 .home-partners {
+  display: grid;
+  grid-template-columns: minmax(190px, .9fr) minmax(0, 3fr);
+  margin-top: 16px;
+  border: 1px solid #111111;
+  background: #ffffff;
+}
+.home-v3 .home-partners-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 22px 24px;
+  border-right: 1px solid #111111;
+}
+.home-v3 .home-partners-copy strong { color: #111111; font-size: 16px; }
+.home-v3 .home-partners-copy span { margin-top: 6px; color: #737378; font-size: 11px; }
+.home-v3 .home-partners .partner-roster { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+.home-v3 .home-partners .partner-roster li {
+  min-height: 84px;
+  border-right: 1px solid #d4d4d7;
+  border-bottom: 0;
+  font-size: 13px;
+}
+.home-v3 .home-partners .partner-roster li:last-child { border-right: 0; }
+
+@media (max-width: 760px) {
+  .official-partners,
+  .home-v3 .home-partners {
+    grid-template-columns: 1fr;
+  }
+  .official-partners-copy,
+  .home-v3 .home-partners-copy {
+    border-right: 0;
+    border-bottom: 1px solid var(--ink-900);
+  }
+  .partner-roster,
+  .home-v3 .home-partners .partner-roster {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .partner-roster li,
+  .home-v3 .home-partners .partner-roster li {
+    min-height: 68px;
+    border-right: 1px solid #d4d4d7;
+    border-bottom: 1px solid #d4d4d7;
+  }
+  .partner-roster li:nth-child(3n) { border-right: 1px solid #d4d4d7; }
+  .partner-roster li:nth-child(2n),
+  .home-v3 .home-partners .partner-roster li:nth-child(2n) { border-right: 0; }
+  .partner-roster li:nth-last-child(-n + 3) { border-bottom: 1px solid #d4d4d7; }
+  .partner-roster li:nth-last-child(-n + 2),
+  .home-v3 .home-partners .partner-roster li:nth-last-child(-n + 2) { border-bottom: 0; }
 }
 
 /* ============ CITY ============ */
@@ -5230,6 +5336,67 @@ img { max-width: 100%; display: block; }
   color: #ffffff !important;
 }
 
+/* ====================================================
+   Layout polish · spacing, logo rendering and friend links
+   ==================================================== */
+
+/* Preserve the supplied artwork exactly; compositing created a false shadow. */
+.brand-logo {
+  mix-blend-mode: normal;
+  filter: none;
+}
+
+/* Hover cards use a complete inverse state, including small metadata. */
+.home-v3 .proof-story:hover :is(.proof-meta, h3, p, .proof-link) {
+  color: #ffffff !important;
+}
+
+/* The city support panel previously relied on child spacing and touched edges. */
+.home-v3 .city-rights { padding: 28px 30px; }
+.home-v3 .city-rights ol { padding-left: 20px; }
+.home-v3 .city-block { padding: 26px 28px; }
+
+/* Shared footer friendly links. */
+.friend-links {
+  display: grid;
+  grid-template-columns: 140px minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+  padding: 24px 0;
+  border-top: 1px solid rgba(255, 255, 255, .12);
+}
+.friend-links strong {
+  color: #ffffff;
+  font-size: 12px;
+  letter-spacing: .14em;
+}
+.friend-links-list { display: flex; flex-wrap: wrap; gap: 10px 24px; }
+.friend-links a {
+  color: rgba(255, 255, 255, .65);
+  font-size: 13px;
+  border-bottom: 1px solid transparent;
+  transition: color .2s, border-color .2s;
+}
+.friend-links a:hover {
+  color: #ffffff;
+  border-bottom-color: currentColor;
+}
+.home-v3 .friend-links,
+.subpage-v3 .friend-links { border-top-color: #d4d4d7; }
+.home-v3 .friend-links strong,
+.subpage-v3 .friend-links strong { color: #111111; }
+.home-v3 .friend-links a,
+.subpage-v3 .friend-links a { color: #5f5f64; }
+.home-v3 .friend-links a:hover,
+.subpage-v3 .friend-links a:hover { color: var(--swiss-orange-text); }
+
+@media (max-width: 640px) {
+  .home-v3 .city-rights,
+  .home-v3 .city-block { padding: 22px 20px; }
+  .friend-links { grid-template-columns: 1fr; gap: 12px; }
+  .friend-links-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 16px; }
+}
+
 /* CTA surfaces need the inverse palette. These selectors intentionally come
    after the light-surface text rules to prevent orange-on-orange labels. */
 .subpage-v3 .section-cta .section-tag.section-tag,
@@ -5258,3 +5425,300 @@ img { max-width: 100%; display: block; }
   opacity: 1 !important;
 }
 .subpage-v3 .solution.highlight .solution-num { color: #ffffff !important; }
+
+/* ====================================================
+   Chinese typography · balanced lines and clear rhythm
+   ==================================================== */
+
+/* Keep Chinese punctuation and mixed Latin text together more naturally. */
+:is(.home-v3, .subpage-v3) :is(h1, h2, h3, p, li, dt, dd) {
+  line-break: strict;
+  overflow-wrap: break-word;
+}
+:is(.home-v3, .subpage-v3) :is(h1, h2, h3) {
+  text-wrap: balance;
+}
+:is(.home-v3, .subpage-v3) :is(p, li, dd) {
+  text-wrap: pretty;
+}
+
+/* Introductory copy is short enough to balance as a unit rather than leave
+   an isolated phrase on the final line. */
+.home-v3 .hero-sub,
+.subpage-v3 :is(.page-hero, .eco-hero, .news-hero, .tal-hero, .aidaily-hero, .changelog-hero) .page-hero-sub {
+  max-width: 52rem !important;
+  line-height: 1.68 !important;
+  text-wrap: balance;
+}
+.home-v3 .section-sub,
+.subpage-v3 :is(.section-sub, .eco-brands-subtitle) {
+  max-width: 48rem;
+  color: #4b4b50 !important;
+  line-height: 1.68;
+}
+
+/* Direct section intros do not have the .section-head wrapper that normally
+   supplies space before the first card grid. */
+.subpage-v3 .eco-brands-subtitle + .eco-brands-grid {
+  margin-top: 32px;
+}
+
+/* Actions and evidence notes are separate reading beats, not continuations
+   of the preceding sentence. */
+.subpage-v3 .page-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+}
+.subpage-v3 .page-hero-actions + :is(.verification-note, .service-response) {
+  margin-top: 16px !important;
+}
+.subpage-v3 .section-sub + .verification-note {
+  margin-top: 20px;
+}
+
+/* Touch targets keep the same visual weight while gaining usable padding. */
+.nav-toggle {
+  width: 44px;
+  height: 44px;
+}
+
+@media (max-width: 800px) {
+  .nav-links.show {
+    max-height: calc(100dvh - var(--nav-h));
+    padding: 18px 24px;
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+  }
+  .nav-links.show > a,
+  .nav-links.show > .nav-dropdown > .nav-drop-trigger,
+  .nav-links.show .nav-drop-menu a {
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+  }
+  .nav-links.show > a,
+  .nav-links.show > .nav-dropdown > .nav-drop-trigger {
+    display: flex;
+    padding-top: 9px;
+    padding-bottom: 9px;
+  }
+}
+
+@media (max-width: 640px) {
+  /* Preserve the authored semantic break, then balance only the emphasized
+     phrase so a final one- or two-character line is not left behind. */
+  .subpage-v3 :is(.page-hero, .eco-hero, .news-hero, .tal-hero, .aidaily-hero, .changelog-hero) h1 > :is(.grad, .grad-2),
+  .subpage-v3 .section-title > :is(.grad, .grad-2) {
+    display: inline-block;
+    max-width: 100%;
+    text-wrap: balance;
+  }
+  .subpage-v3 .page-hero-actions { margin-top: 24px; }
+  .subpage-v3 .eco-brands-subtitle + .eco-brands-grid { margin-top: 24px; }
+
+  /* Remove the nested container gutter from the framed OPC statistic grid and
+     stop long numerals from forcing unequal columns. */
+  .subpage-v3 .opc-overview .opc-stats-bar {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding-right: 0;
+    padding-left: 0;
+  }
+  .subpage-v3 .opc-stat {
+    min-width: 0;
+    padding: 18px 12px;
+  }
+  .subpage-v3 .opc-stat strong {
+    font-size: clamp(24px, 7vw, 28px);
+  }
+
+  .home-v3 .g-filter,
+  .subpage-v3 .news-filter {
+    min-height: 44px;
+  }
+}
+
+@media (max-width: 340px) {
+  .subpage-v3 :is(.page-hero, .eco-hero, .news-hero, .tal-hero, .aidaily-hero, .changelog-hero) h1 {
+    font-size: clamp(34px, 10.8vw, 36px) !important;
+  }
+  .subpage-v3 :is(.page-hero, .eco-hero, .news-hero, .tal-hero, .aidaily-hero, .changelog-hero) .page-hero-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  .subpage-v3 :is(.page-hero, .eco-hero, .news-hero, .tal-hero, .aidaily-hero, .changelog-hero) .page-hero-actions .btn {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+/* ====================================================
+   About · balanced split panel
+   Explicit page-level spacing overrides the legacy centered layout.
+   ==================================================== */
+.subpage-v3 #about .section-head { margin-bottom: 30px; }
+.subpage-v3 #about .about-grid {
+  grid-template-columns: minmax(0, 3fr) minmax(380px, 2fr);
+  gap: 0;
+  align-items: stretch;
+  border: 1px solid #111111;
+}
+.subpage-v3 #about .about-text {
+  min-width: 0;
+  padding: clamp(48px, 4.4vw, 56px) !important;
+}
+.subpage-v3 #about .about-text .lead {
+  max-width: 34em;
+  margin: 0 0 18px;
+  color: #2c2c2f;
+  font-size: clamp(18px, 1.6vw, 21px);
+  line-height: 1.65;
+  letter-spacing: -.012em;
+}
+.subpage-v3 #about .about-text .lead strong {
+  padding-bottom: .05em;
+  color: #111111;
+  background: none;
+  border-bottom: 2px solid #ff4f00;
+}
+.subpage-v3 #about .about-text > p {
+  max-width: 42em;
+  margin: 0;
+  color: #5f5f64;
+  font-size: 16px;
+  line-height: 1.75;
+}
+.subpage-v3 #about .about-points {
+  gap: 0;
+  margin: 30px 0 0;
+  padding: 0;
+  border-top: 1px solid #d4d4d7;
+}
+.subpage-v3 #about .about-points li {
+  display: grid;
+  grid-template-columns: 104px minmax(0, 1fr);
+  gap: 18px;
+  align-items: baseline;
+  padding: 14px 0;
+  color: #2c2c2f;
+  font-size: 15px;
+  line-height: 1.65;
+  background: transparent;
+  border: 0 !important;
+  border-bottom: 1px solid #d4d4d7 !important;
+  border-radius: 0;
+  box-shadow: none;
+}
+.subpage-v3 #about .about-points span {
+  min-width: 0;
+  color: var(--swiss-orange-text);
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: .01em;
+}
+.subpage-v3 #about .about-card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  padding: clamp(34px, 3.2vw, 42px);
+  background: #111111;
+  border-radius: 0;
+  box-shadow: none;
+}
+.subpage-v3 #about .about-card .card-glow { display: none; }
+.subpage-v3 #about .about-card h3 {
+  margin: 0 0 16px;
+  color: #ff8a54;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.4;
+  letter-spacing: .08em;
+}
+.subpage-v3 #about .about-card .quote {
+  margin: 0 0 28px;
+  color: #ffffff;
+  font-size: clamp(23px, 2.2vw, 30px);
+  line-height: 1.35;
+  letter-spacing: -.025em;
+}
+.subpage-v3 #about .three-tracks {
+  gap: 0;
+  border-top: 1px solid rgba(255, 255, 255, .28);
+}
+.subpage-v3 #about .track {
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr);
+  column-gap: 14px;
+  padding: 15px 0;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, .28);
+  border-radius: 0;
+}
+.subpage-v3 #about .track:hover { background: transparent; transform: none; }
+.subpage-v3 #about .track-num {
+  grid-row: 1 / span 2;
+  padding-top: 2px;
+  color: #ff8a54;
+  font-size: 11px;
+  line-height: 1.5;
+}
+.subpage-v3 #about .track h4 {
+  margin: 0 0 3px;
+  color: #ffffff;
+  font-size: 16px;
+  line-height: 1.45;
+}
+.subpage-v3 #about .track p {
+  margin: 0;
+  color: #d4d4d7;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+@media (max-width: 1023px) {
+  .subpage-v3 #about .about-grid { grid-template-columns: 1fr; }
+  .subpage-v3 #about .about-text { padding: 36px !important; }
+  .subpage-v3 #about .three-tracks { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .subpage-v3 #about .track {
+    grid-template-columns: 1fr;
+    align-content: start;
+    padding: 16px;
+    border-right: 1px solid rgba(255, 255, 255, .28);
+  }
+  .subpage-v3 #about .track:last-child { border-right: 0; }
+  .subpage-v3 #about .track-num {
+    grid-row: auto;
+    margin-bottom: 10px;
+    padding-top: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .subpage-v3 #about .section-head { margin-bottom: 24px; }
+  .subpage-v3 #about .about-text { padding: 28px 24px !important; }
+  .subpage-v3 #about .about-card { padding: 28px 24px; }
+  .subpage-v3 #about .about-points { margin-top: 24px; }
+  .subpage-v3 #about .about-points li {
+    grid-template-columns: 88px minmax(0, 1fr);
+    gap: 12px;
+    padding: 13px 0;
+  }
+  .subpage-v3 #about .three-tracks { grid-template-columns: 1fr; }
+  .subpage-v3 #about .track {
+    grid-template-columns: 38px minmax(0, 1fr);
+    padding: 15px 0;
+    border-right: 0;
+  }
+  .subpage-v3 #about .track-num {
+    grid-row: 1 / span 2;
+    margin-bottom: 0;
+    padding-top: 2px;
+  }
+}
+
+@media (max-width: 360px) {
+  .subpage-v3 #about .about-text { padding: 24px 20px !important; }
+  .subpage-v3 #about .about-card { padding: 26px 20px; }
+}
